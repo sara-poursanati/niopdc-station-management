@@ -1,4 +1,4 @@
-package ir.niopdc.fms.entity.entity;
+package ir.niopdc.fms.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

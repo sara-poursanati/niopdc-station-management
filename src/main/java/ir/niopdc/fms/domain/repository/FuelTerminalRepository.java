@@ -1,6 +1,6 @@
-package ir.niopdc.fms.entity.repository;
+package ir.niopdc.fms.domain.repository;
 
-import ir.niopdc.fms.entity.entity.FuelTerminal;
+import ir.niopdc.fms.domain.entity.FuelTerminal;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

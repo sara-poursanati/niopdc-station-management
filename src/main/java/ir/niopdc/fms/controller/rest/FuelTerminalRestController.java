@@ -1,8 +1,8 @@
 package ir.niopdc.fms.controller.rest;
 
-import ir.niopdc.fms.entity.dto.FuelTerminalCreateUpdateDTO;
-import ir.niopdc.fms.entity.dto.FuelTerminalGetDTO;
-import ir.niopdc.fms.entity.service.FuelTerminalService;
+import ir.niopdc.fms.domain.dto.FuelTerminalCreateUpdateDTO;
+import ir.niopdc.fms.domain.dto.FuelTerminalGetDTO;
+import ir.niopdc.fms.domain.service.FuelTerminalService;
 import ir.niopdc.fms.facade.FuelTerminalFacadeService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;

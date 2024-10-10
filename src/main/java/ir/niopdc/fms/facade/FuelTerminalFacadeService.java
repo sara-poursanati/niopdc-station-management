@@ -1,9 +1,9 @@
 package ir.niopdc.fms.facade;
 
-import ir.niopdc.fms.entity.dto.FuelTerminalCreateUpdateDTO;
-import ir.niopdc.fms.entity.entity.FuelStation;
-import ir.niopdc.fms.entity.service.FuelStationService;
-import ir.niopdc.fms.entity.service.FuelTerminalService;
+import ir.niopdc.fms.domain.dto.FuelTerminalCreateUpdateDTO;
+import ir.niopdc.fms.domain.entity.FuelStation;
+import ir.niopdc.fms.domain.service.FuelStationService;
+import ir.niopdc.fms.domain.service.FuelTerminalService;
 import ir.niopdc.fms.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

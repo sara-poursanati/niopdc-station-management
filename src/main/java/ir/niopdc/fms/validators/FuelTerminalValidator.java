@@ -1,6 +1,6 @@
 package ir.niopdc.fms.validators;
 
-import ir.niopdc.fms.entity.dto.FuelTerminalCreateUpdateDTO;
+import ir.niopdc.fms.domain.dto.FuelTerminalCreateUpdateDTO;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 

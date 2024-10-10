@@ -1,8 +1,8 @@
 package ir.niopdc.fms.controller.mvc;
 
-import ir.niopdc.fms.entity.dto.FuelStationCreateUpdateDTO;
-import ir.niopdc.fms.entity.dto.FuelStationGetDTO;
-import ir.niopdc.fms.entity.service.FuelStationService;
+import ir.niopdc.fms.domain.dto.FuelStationCreateUpdateDTO;
+import ir.niopdc.fms.domain.dto.FuelStationGetDTO;
+import ir.niopdc.fms.domain.service.FuelStationService;
 import ir.niopdc.fms.validators.FuelStationValidator;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;

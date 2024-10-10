@@ -1,6 +1,6 @@
 package ir.niopdc.fms.controller.mvc;
 
-import ir.niopdc.fms.entity.service.FuelStationService;
+import ir.niopdc.fms.domain.service.FuelStationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

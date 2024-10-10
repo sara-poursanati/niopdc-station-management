@@ -1,10 +1,10 @@
-package ir.niopdc.fms.entity.service;
+package ir.niopdc.fms.domain.service;
 
-import ir.niopdc.fms.entity.dto.FuelTerminalCreateUpdateDTO;
-import ir.niopdc.fms.entity.dto.FuelTerminalGetDTO;
-import ir.niopdc.fms.entity.entity.FuelStation;
-import ir.niopdc.fms.entity.entity.FuelTerminal;
-import ir.niopdc.fms.entity.repository.FuelTerminalRepository;
+import ir.niopdc.fms.domain.dto.FuelTerminalCreateUpdateDTO;
+import ir.niopdc.fms.domain.dto.FuelTerminalGetDTO;
+import ir.niopdc.fms.domain.entity.FuelStation;
+import ir.niopdc.fms.domain.entity.FuelTerminal;
+import ir.niopdc.fms.domain.repository.FuelTerminalRepository;
 import ir.niopdc.fms.exceptions.NotFoundException;
 import ir.niopdc.fms.mapper.FuelTerminalMapper;
 import org.springframework.stereotype.Service;

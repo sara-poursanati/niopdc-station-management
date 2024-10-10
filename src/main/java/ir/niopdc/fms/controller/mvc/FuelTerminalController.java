@@ -1,8 +1,8 @@
 package ir.niopdc.fms.controller.mvc;
 
-import ir.niopdc.fms.entity.dto.FuelTerminalCreateUpdateDTO;
-import ir.niopdc.fms.entity.dto.FuelTerminalGetDTO;
-import ir.niopdc.fms.entity.service.FuelTerminalService;
+import ir.niopdc.fms.domain.dto.FuelTerminalCreateUpdateDTO;
+import ir.niopdc.fms.domain.dto.FuelTerminalGetDTO;
+import ir.niopdc.fms.domain.service.FuelTerminalService;
 import ir.niopdc.fms.facade.FuelTerminalFacadeService;
 import ir.niopdc.fms.validators.FuelTerminalValidator;
 import jakarta.annotation.Nullable;

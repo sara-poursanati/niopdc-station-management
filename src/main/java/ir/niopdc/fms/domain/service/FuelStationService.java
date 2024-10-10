@@ -1,9 +1,9 @@
-package ir.niopdc.fms.entity.service;
+package ir.niopdc.fms.domain.service;
 
-import ir.niopdc.fms.entity.dto.FuelStationCreateUpdateDTO;
-import ir.niopdc.fms.entity.dto.FuelStationGetDTO;
-import ir.niopdc.fms.entity.entity.FuelStation;
-import ir.niopdc.fms.entity.repository.FuelStationRepository;
+import ir.niopdc.fms.domain.dto.FuelStationCreateUpdateDTO;
+import ir.niopdc.fms.domain.dto.FuelStationGetDTO;
+import ir.niopdc.fms.domain.entity.FuelStation;
+import ir.niopdc.fms.domain.repository.FuelStationRepository;
 import ir.niopdc.fms.exceptions.AlreadyExistsException;
 import ir.niopdc.fms.exceptions.NotFoundException;
 import ir.niopdc.fms.mapper.FuelStationMapper;

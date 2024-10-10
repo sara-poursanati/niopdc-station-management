@@ -1,4 +1,4 @@
-package ir.niopdc.fms.entity.service;
+package ir.niopdc.fms.domain.service;
 
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.transaction.annotation.Transactional;

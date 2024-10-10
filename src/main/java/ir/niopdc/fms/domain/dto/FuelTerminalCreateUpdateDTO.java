@@ -1,4 +1,4 @@
-package ir.niopdc.fms.entity.dto;
+package ir.niopdc.fms.domain.dto;
 
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;

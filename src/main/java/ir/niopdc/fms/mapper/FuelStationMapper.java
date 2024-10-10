@@ -1,8 +1,8 @@
 package ir.niopdc.fms.mapper;
 
-import ir.niopdc.fms.entity.dto.FuelStationCreateUpdateDTO;
-import ir.niopdc.fms.entity.dto.FuelStationGetDTO;
-import ir.niopdc.fms.entity.entity.FuelStation;
+import ir.niopdc.fms.domain.dto.FuelStationCreateUpdateDTO;
+import ir.niopdc.fms.domain.dto.FuelStationGetDTO;
+import ir.niopdc.fms.domain.entity.FuelStation;
 import org.springframework.beans.BeanUtils;
 import java.util.List;
 import java.util.stream.Collectors;
