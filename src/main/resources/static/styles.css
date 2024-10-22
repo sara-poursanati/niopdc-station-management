@@ -1,3 +1,17 @@
+.header-side-image{
+
+    /*border: 1px solid #ddd;*/
+    border-radius: 4px;
+    padding: 40px;
+    width: 150px;
+
+}
+
+.header-side-image-disable {
+    position: absolute;
+    top:25%;
+}
+
 * {
     margin: 0;
     padding: 0;

@@ -9,8 +9,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
 
-    @Autowired
     private FuelStationService fuelStationService;
+
+    @Autowired
+    private void setFuelStationService(FuelStationService fuelStationService) {
+        this.fuelStationService = fuelStationService;
+    }
 
     @GetMapping("/dashboard")
     public String showDashboard(Model theModel)
