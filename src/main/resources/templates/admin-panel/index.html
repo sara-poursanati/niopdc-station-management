@@ -1,37 +1,37 @@
 <!doctype html>
 <html lang="en" dir="ltr">
 
-<head>
+<head  th:fragment="head">
 
     <!-- META DATA -->
     <meta charset="UTF-8">
     <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Sash – Bootstrap 5  Admin & Dashboard Template">
-    <meta name="author" content="Spruko Technologies Private Limited">
-    <meta name="keywords"
-        content="admin,admin dashboard,admin panel,admin template,bootstrap,clean,dashboard,flat,jquery,modern,responsive,premium admin templates,responsive admin,ui,ui kit.">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
     <!-- FAVICON -->
-    <link rel="shortcut icon" type="image/x-icon" href="../assets/images/brand/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="../static/assets/images/brand/favicon.ico" th:href="@{/assets/images/brand/favicon.ico}"/>
 
     <!-- TITLE -->
-    <title>Sash – Bootstrap 5 Admin & Dashboard Template </title>
+    <title>پنل مدیریت - نسخه آزمایشی</title>
 
     <!-- BOOTSTRAP CSS -->
-    <link id="style" href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link id="style" href="../static/assets/plugins/bootstrap/css/bootstrap.min.css" th:href="@{/assets/plugins/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
 
     <!-- STYLE CSS -->
-    <link href="../assets/css/style.css" rel="stylesheet" />
-    <link href="../assets/css/dark-style.css" rel="stylesheet" />
-    <link href="../assets/css/transparent-style.css" rel="stylesheet">
-    <link href="../assets/css/skin-modes.css" rel="stylesheet" />
+    <link href="../static/assets/css/style.css" th:href="@{/assets/css/style.css}" rel="stylesheet" />
+    <link href="../static/assets/css/dark-style.css" th:href="@{/assets/css/dark-style.css}" rel="stylesheet" />
+    <link href="../static/assets/css/transparent-style.css" th:href="@{/assets/css/transparent-style.css}" rel="stylesheet">
+    <link href="../static/assets/css/skin-modes.css" th:href="@{/assets/css/skin-modes.css}" rel="stylesheet" />
 
     <!--- FONT-ICONS CSS -->
-    <link href="../assets/css/icons.css" rel="stylesheet" />
+    <link href="../static/assets/css/icons.css" th:href="@{/assets/css/icons.css}" rel="stylesheet" />
+    <link href="../static/assets/css/custom-font.css" th:href="@{/assets/css/custom-font.css}" rel="stylesheet" />
 
     <!-- COLOR SKIN CSS -->
-    <link id="theme" rel="stylesheet" type="text/css" media="all" href="../assets/colors/color1.css" />
+    <link id="theme" rel="stylesheet" type="text/css" media="all" href="../static/assets/colors/color1.css" th:href="@{/assets/colors/color1.css}" />
+
 
     <style>
         .header-side-image{
@@ -64,7 +64,7 @@
         <div class="page-main">
 
             <!-- app-Header -->
-            <div class="app-header header sticky">
+            <div class="app-header header sticky" th:fragment="app-header">
                 <div class="container-fluid main-container">
                     <div class="d-flex">
                         <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-bs-toggle="sidebar" href="javascript:void(0)"></a>
@@ -126,98 +126,7 @@
                                         <!-- FULL-SCREEN -->
 
                                         <!-- NOTIFICATIONS -->
-<!--                                        <div class="dropdown  d-flex message">-->
-<!--                                            <a class="nav-link icon text-center" data-bs-toggle="dropdown">-->
-<!--                                                <i class="fe fe-message-square"></i><span class="pulse-danger"></span>-->
-<!--                                            </a>-->
-<!--                                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">-->
-<!--                                                <div class="drop-heading border-bottom">-->
-<!--                                                    <div class="d-flex">-->
-<!--                                                        <h6 class="mt-1 mb-0 fs-16 fw-semibold text-dark">You have 5-->
-<!--                                                            Messages</h6>-->
-<!--                                                        <div class="ms-auto">-->
-<!--                                                            <a href="javascript:void(0)" class="text-muted p-0 fs-12">make all unread</a>-->
-<!--                                                        </div>-->
-<!--                                                    </div>-->
-<!--                                                </div>-->
-<!--                                                <div class="message-menu message-menu-scroll">-->
-<!--                                                    <a class="dropdown-item d-flex" href="chat.html">-->
-<!--                                                        <span-->
-<!--                                                            class="avatar avatar-md brround me-3 align-self-center cover-image"-->
-<!--                                                            data-bs-image-src="../assets/images/users/1.jpg"></span>-->
-<!--                                                        <div class="wd-90p">-->
-<!--                                                            <div class="d-flex">-->
-<!--                                                                <h5 class="mb-1">Peter Theil</h5>-->
-<!--                                                                <small class="text-muted ms-auto text-end">-->
-<!--                                                                    6:45 am-->
-<!--                                                                </small>-->
-<!--                                                            </div>-->
-<!--                                                            <span>Commented on file Guest list....</span>-->
-<!--                                                        </div>-->
-<!--                                                    </a>-->
-<!--                                                    <a class="dropdown-item d-flex" href="chat.html">-->
-<!--                                                        <span-->
-<!--                                                            class="avatar avatar-md brround me-3 align-self-center cover-image"-->
-<!--                                                            data-bs-image-src="../assets/images/users/15.jpg"></span>-->
-<!--                                                        <div class="wd-90p">-->
-<!--                                                            <div class="d-flex">-->
-<!--                                                                <h5 class="mb-1">Abagael Luth</h5>-->
-<!--                                                                <small class="text-muted ms-auto text-end">-->
-<!--                                                                    10:35 am-->
-<!--                                                                </small>-->
-<!--                                                            </div>-->
-<!--                                                            <span>New Meetup Started......</span>-->
-<!--                                                        </div>-->
-<!--                                                    </a>-->
-<!--                                                    <a class="dropdown-item d-flex" href="chat.html">-->
-<!--                                                        <span-->
-<!--                                                            class="avatar avatar-md brround me-3 align-self-center cover-image"-->
-<!--                                                            data-bs-image-src="../assets/images/users/12.jpg"></span>-->
-<!--                                                        <div class="wd-90p">-->
-<!--                                                            <div class="d-flex">-->
-<!--                                                                <h5 class="mb-1">Brizid Dawson</h5>-->
-<!--                                                                <small class="text-muted ms-auto text-end">-->
-<!--                                                                    2:17 pm-->
-<!--                                                                </small>-->
-<!--                                                            </div>-->
-<!--                                                            <span>Brizid is in the Warehouse...</span>-->
-<!--                                                        </div>-->
-<!--                                                    </a>-->
-<!--                                                    <a class="dropdown-item d-flex" href="chat.html">-->
-<!--                                                        <span-->
-<!--                                                            class="avatar avatar-md brround me-3 align-self-center cover-image"-->
-<!--                                                            data-bs-image-src="../assets/images/users/4.jpg"></span>-->
-<!--                                                        <div class="wd-90p">-->
-<!--                                                            <div class="d-flex">-->
-<!--                                                                <h5 class="mb-1">Shannon Shaw</h5>-->
-<!--                                                                <small class="text-muted ms-auto text-end">-->
-<!--                                                                    7:55 pm-->
-<!--                                                                </small>-->
-<!--                                                            </div>-->
-<!--                                                            <span>New Product Realease......</span>-->
-<!--                                                        </div>-->
-<!--                                                    </a>-->
-<!--                                                    <a class="dropdown-item d-flex" href="chat.html">-->
-<!--                                                        <span-->
-<!--                                                            class="avatar avatar-md brround me-3 align-self-center cover-image"-->
-<!--                                                            data-bs-image-src="../assets/images/users/3.jpg"></span>-->
-<!--                                                        <div class="wd-90p">-->
-<!--                                                            <div class="d-flex">-->
-<!--                                                                <h5 class="mb-1">Cherry Blossom</h5>-->
-<!--                                                                <small class="text-muted ms-auto text-end">-->
-<!--                                                                    7:55 pm-->
-<!--                                                                </small>-->
-<!--                                                            </div>-->
-<!--                                                            <span>You have appointment on......</span>-->
-<!--                                                        </div>-->
-<!--                                                    </a>-->
 
-<!--                                                </div>-->
-<!--                                                <div class="dropdown-divider m-0"></div>-->
-<!--                                                <a href="javascript:void(0)" class="dropdown-item text-center p-3 text-muted">See all-->
-<!--                                                    Messages</a>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
                                         <!-- MESSAGE-BOX -->
                                         <div class="dropdown d-flex header-settings">
                                             <a href="javascript:void(0);" class="nav-link icon"
@@ -264,16 +173,16 @@
             <!-- /app-Header -->
 
             <!--APP-SIDEBAR-->
-            <div class="sticky">
+            <div class="sticky" th:fragment="sidebar">
                 <div class="app-sidebar__overlay" data-bs-toggle="sidebar"></div>
                 <div class="app-sidebar">
                     <div class="side-header">
-                        <a class="header-brand1" th:href="@{/dashboard}">
-<!--                            <img src="../assets/images/brand/logo.png" class="header-brand-img desktop-logo" alt="logo">-->
-<!--                            <img src="../assets/images/brand/logo-1.png" class="header-brand-img toggle-logo"-->
-<!--                                alt="logo">-->
-                            <img src="../assets/images/brand/logo-oil.png" class="header-side-image-disable header-brand-img light-logo" alt="logo">
-                            <img src="../assets/images/brand/logo-oil.png" class="header-side-image header-brand-img logo-1"
+                        <a class="header-brand1" href="index.html">
+                            <img src="../static/assets/images/brand/logo.png" th:src="@{/assets/images/brand/logo.png}" class="header-brand-img desktop-logo" alt="logo">
+                            <img src="../static/assets/images/brand/logo-1.png" th:src="@{/assets/images/brand/logo-1.png}" class="header-brand-img toggle-logo"
+                                 alt="logo">
+                            <img src="../static/assets/images/brand/logo-2.png" th:src="@{/assets/images/brand/logo-2.png}" class="header-brand-img light-logo" alt="logo">
+                            <img src="../static/assets/images/brand/logo-3.png" th:src="@{/assets/images/brand/logo-3.png}" class="header-brand-img light-logo1"
                                  alt="logo">
                         </a>
                         <!-- LOGO -->
@@ -288,7 +197,7 @@
                                 <h3 th:text="#{main}"></h3>
                             </li>
                             <li class="slide">
-                                <a class="side-menu__item has-link" data-bs-toggle="slide" th:href="@{/dashboard}"><i
+                                <a class="side-menu__item has-link" data-bs-toggle="slide" th:href="@{/}"><i
                                         class="side-menu__icon fe fe-home"></i><span
                                         class="side-menu__label" th:text = "#{dashboard}"></span></a>
                             </li>
@@ -2394,14 +2303,14 @@
                         <ul class="row p-3">
                             <li class="col-lg-6 mb-2">
                                 <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block active"
-                                   th:href="@{/dashboard(lang=#{lang.change.en})}">
+                                   th:href="@{/(lang=#{lang.change.en})}">
                                     <span class="country-selector"><img alt="" src="../assets/images/flags/us_flag.jpg"
                                             class="me-3 language"></span>English
                                 </a>
                             </li>
                             <li class="col-lg-6 mb-2">
                                 <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block"
-                                th:href="@{/dashboard(lang=#{lang.change.fa})}">
+                                th:href="@{/(lang=#{lang.change.fa})}">
                                     <span class="country-selector"><img alt=""
                                         src="../assets/images/flags/ir.svg"
                                         class="me-3 language"></span>Persian
@@ -2415,11 +2324,11 @@
         <!-- Country-selector modal-->
 
         <!-- FOOTER -->
-        <footer class="footer">
+        <footer class="footer" th:fragment="app-footer">
             <div class="container">
                 <div class="row align-items-center flex-row-reverse">
                     <div class="col-md-12 col-sm-12 text-center">
-                        Copyright © <span id="year"></span> <a href="javascript:void(0)">Beh Pardakht</a>. All rights reserved.
+                        © کلیه حقوق این برنامه متعلق به شرکت ملی پخش فراورده‌های نفتی ایران است.
                     </div>
                 </div>
             </div>
@@ -2431,78 +2340,84 @@
     <!-- BACK-TO-TOP -->
     <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
 
-    <!-- JQUERY JS -->
-    <script src="../assets/js/jquery.min.js"></script>
+    <th:block th:fragment="scripts">
+        <!-- JQUERY JS -->
+        <script src="../static/assets/js/jquery.min.js" th:src="@{/assets/js/jquery.min.js}"></script>
 
-    <!-- BOOTSTRAP JS -->
-    <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
-    <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+        <!-- BOOTSTRAP JS -->
+        <script src="../static/assets/plugins/bootstrap/js/popper.min.js" th:src="@{/assets/plugins/bootstrap/js/popper.min.js}"></script>
+        <script src="../static/assets/plugins/bootstrap/js/bootstrap.min.js" th:src="@{/assets/plugins/bootstrap/js/bootstrap.min.js}"></script>
 
-    <!-- SPARKLINE JS-->
-    <script src="../assets/js/jquery.sparkline.min.js"></script>
+        <!-- SPARKLINE JS-->
+        <script src="../static/assets/js/jquery.sparkline.min.js" th:src="@{/assets/js/jquery.sparkline.min.js}"></script>
 
-    <!-- Sticky js -->
-    <script src="../assets/js/sticky.js"></script>
+        <!-- Sticky js -->
+        <script src="../static/assets/js/sticky.js" th:src="@{/assets/js/sticky.js}"></script>
 
-    <!-- CHART-CIRCLE JS-->
-    <script src="../assets/js/circle-progress.min.js"></script>
+        <!-- CHART-CIRCLE JS-->
+        <script src="../static/assets/js/circle-progress.min.js" th:src="@{/assets/js/circle-progress.min.js}"></script>
 
-    <!-- PIETY CHART JS-->
-    <script src="../assets/plugins/peitychart/jquery.peity.min.js"></script>
-    <script src="../assets/plugins/peitychart/peitychart.init.js"></script>
+        <!-- PIETY CHART JS-->
+        <script src="../static/assets/plugins/peitychart/jquery.peity.min.js" th:src="@{/assets/plugins/peitychart/jquery.peity.min.js}"></script>
+        <script src="../static/assets/plugins/peitychart/peitychart.init.js" th:src="@{/assets/plugins/peitychart/peitychart.init.js}"></script>
 
-    <!-- SIDEBAR JS -->
-    <script src="../assets/plugins/sidebar/sidebar.js"></script>
+        <!-- SIDEBAR JS -->
+        <script src="../static/assets/plugins/sidebar/sidebar.js" th:src="@{/assets/plugins/sidebar/sidebar.js}"></script>
 
-    <!-- Perfect SCROLLBAR JS-->
-    <script src="../assets/plugins/p-scroll/perfect-scrollbar.js"></script>
-    <script src="../assets/plugins/p-scroll/pscroll.js"></script>
-    <script src="../assets/plugins/p-scroll/pscroll-1.js"></script>
+        <!-- Perfect SCROLLBAR JS-->
+        <script src="../static/assets/plugins/p-scroll/perfect-scrollbar.js" th:src="@{/assets/plugins/p-scroll/perfect-scrollbar.js}"></script>
+        <script src="../static/assets/plugins/p-scroll/pscroll.js" th:src="@{/assets/plugins/p-scroll/pscroll.js}"></script>
+        <script src="../static/assets/plugins/p-scroll/pscroll-1.js" th:src="@{/assets/plugins/p-scroll/pscroll-1.js}"></script>
 
-    <!-- INTERNAL CHARTJS CHART JS-->
-    <script src="../assets/plugins/chart/Chart.bundle.js"></script>
-    <script src="../assets/plugins/chart/rounded-barchart.js"></script>
-    <script src="../assets/plugins/chart/utils.js"></script>
+        <!-- INTERNAL CHARTJS CHART JS-->
+        <script src="../static/assets/plugins/chart/Chart.bundle.js" th:src="@{/assets/plugins/chart/Chart.bundle.js}"></script>
+        <script src="../static/assets/plugins/chart/rounded-barchart.js" th:src="@{/assets/plugins/chart/rounded-barchart.js}"></script>
+        <script src="../static/assets/plugins/chart/utils.js" th:src="@{/assets/plugins/chart/utils.js}"></script>
 
-    <!-- INTERNAL SELECT2 JS -->
-    <script src="../assets/plugins/select2/select2.full.min.js"></script>
+        <!-- INTERNAL SELECT2 JS -->
+        <script src="../static/assets/plugins/select2/select2.full.min.js" th:src="@{/assets/plugins/select2/select2.full.min.js}"></script>
 
-    <!-- INTERNAL Data tables js-->
-    <script src="../assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
-    <script src="../assets/plugins/datatable/js/dataTables.bootstrap5.js"></script>
-    <script src="../assets/plugins/datatable/dataTables.responsive.min.js"></script>
+        <!-- INTERNAL Data tables js-->
+        <script src="../static/assets/plugins/datatable/js/jquery.dataTables.min.js" th:src="@{/assets/plugins/datatable/js/jquery.dataTables.min.js}"></script>
+        <script src="../static/assets/plugins/datatable/js/dataTables.bootstrap5.js" th:src="@{/assets/plugins/datatable/js/dataTables.bootstrap5.js}"></script>
+        <script src="../static/assets/plugins/datatable/dataTables.responsive.min.js" th:src="@{/assets/plugins/datatable/dataTables.responsive.min.js}"></script>
 
-    <!-- INTERNAL APEXCHART JS -->
-    <script src="../assets/js/apexcharts.js"></script>
-    <script src="../assets/plugins/apexchart/irregular-data-series.js"></script>
+        <!-- INTERNAL APEXCHART JS -->
+        <script src="../static/assets/js/apexcharts.js" th:src="@{/assets/js/apexcharts.js}"></script>
+        <script src="../static/assets/plugins/apexchart/irregular-data-series.js" th:src="@{/assets/plugins/apexchart/irregular-data-series.js}"></script>
 
-    <!-- INTERNAL Flot JS -->
-    <script src="../assets/plugins/flot/jquery.flot.js"></script>
-    <script src="../assets/plugins/flot/jquery.flot.fillbetween.js"></script>
-    <script src="../assets/plugins/flot/chart.flot.sampledata.js"></script>
-    <script src="../assets/plugins/flot/dashboard.sampledata.js"></script>
+        <!-- INTERNAL Flot JS -->
+        <script src="../static/assets/plugins/flot/jquery.flot.js" th:src="@{/assets/plugins/flot/jquery.flot.js}"></script>
+        <script src="../static/assets/plugins/flot/jquery.flot.fillbetween.js" th:src="@{/assets/plugins/flot/jquery.flot.fillbetween.js}"></script>
+        <script src="../static/assets/plugins/flot/chart.flot.sampledata.js" th:src="@{/assets/plugins/flot/chart.flot.sampledata.js}"></script>
+        <script src="../static/assets/plugins/flot/dashboard.sampledata.js" th:src="@{/assets/plugins/flot/dashboard.sampledata.js}"></script>
 
-    <!-- INTERNAL Vector js -->
-    <script src="../assets/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
-    <script src="../assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+        <!-- INTERNAL Vector js -->
+        <script src="../static/assets/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js" th:src="@{/assets/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js}"></script>
+        <script src="../static/assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js" th:src="@{/assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js}"></script>
 
-    <!-- SIDE-MENU JS-->
-    <script src="../assets/plugins/sidemenu/sidemenu.js"></script>
+        <!-- SIDE-MENU JS-->
+        <script src="../static/assets/plugins/sidemenu/sidemenu.js" th:src="@{/assets/plugins/sidemenu/sidemenu.js}"></script>
 
-	<!-- TypeHead js -->
-	<script src="../assets/plugins/bootstrap5-typehead/autocomplete.js"></script>
-    <script src="../assets/js/typehead.js"></script>
+        <!-- TypeHead js -->
+        <script src="../static/assets/plugins/bootstrap5-typehead/autocomplete.js" th:src="@{/assets/plugins/bootstrap5-typehead/autocomplete.js}"></script>
+        <script src="../static/assets/js/typehead.js" th:src="@{/assets/js/typehead.js}"></script>
 
-    <!-- INTERNAL INDEX JS -->
-    <script src="../assets/js/index1.js"></script>
+        <!-- INTERNAL INDEX JS -->
+        <script src="../static/assets/js/index1.js" th:src="@{/assets/js/index1.js}"></script>
 
-    <!-- Color Theme js -->
-    <script src="../assets/js/themeColors.js"></script>
+        <!-- Color Theme js -->
+        <script src="../static/assets/js/themeColors.js" th:src="@{/assets/js/themeColors.js}"></script>
 
-    <!-- CUSTOM JS -->
-    <script src="../assets/js/custom.js"></script>
+        <!-- CUSTOM JS -->
+        <script src="../static/assets/js/custom.js" th:src="@{/assets/js/custom.js}"></script>
 
+        <!-- SHOW PASSWORD JS -->
+        <script src="../assets/js/show-password.min.js"></script>
 
+        <!-- GENERATE OTP JS -->
+        <script src="../assets/js/generate-otp.js"></script>
+    </th:block>
 </body>
 
 </html>

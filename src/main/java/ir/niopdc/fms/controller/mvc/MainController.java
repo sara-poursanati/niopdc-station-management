@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class MainController {
@@ -16,7 +17,7 @@ public class MainController {
         this.fuelStationService = fuelStationService;
     }
 
-    @GetMapping("/dashboard")
+    @RequestMapping("/")
     public String showDashboard(Model theModel)
     {
         var fuelStations = fuelStationService.findAllFuelStation();
@@ -24,26 +25,6 @@ public class MainController {
         theModel.addAttribute("fuelStations", fuelStations);
 
         return "admin-panel/index";
-    }
-
-    @GetMapping("/login")
-    public String showLogin() {
-        return "admin-panel/login";
-    }
-
-    @GetMapping("/register")
-    public String showRegister() {
-        return "admin-panel/register";
-    }
-
-    @GetMapping("/list")
-    public String showList() {
-        return "admin-panel/users-list";
-    }
-
-    @GetMapping("/test")
-    public String test() {
-        return "admin-panel/form-elements";
     }
 
 }
