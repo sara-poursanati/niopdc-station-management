@@ -27,78 +27,80 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-md-8 mx-auto rounded border p-4 m-4">
-                    <h2 class="text-center mb-5">New Fuel Station</h2>
+                <div class="col-md-8 mx-auto rounded p-4 m-4">
+                    <div class="page-header">
+                        <h1 class="page-title">New Fuel Station</h1>
+                    </div>
 
                     <form action="#" enctype="multipart/form-data" th:method="POST" th:action="@{/fuelStations/save}"
                           th:object="${fuelStation}">
 
                         <!-- Add hidden form field to handle the update -->
                         <div class="row mb-3">
-                            <label class="col-sm-4 col-form-label">ID</label>
+                            <label class="col-sm-4 col-form-label" th:text="#{id}"></label>
                             <div class="col-sm-8">
                                 <input type="text" th:field="*{id}"
-                                       class="form-control mb-4 w-25" placeholder="ID"/>
+                                       class="form-control mb-4 w-25" th:placeholder="#{id}"/>
                                 <p th:if="${#fields.hasErrors('id')}" th:errorclass="text-danger"
                                    th:errors="${fuelStation.id}"></p>
                             </div>
                         </div>
 
                         <div class="row mb-3">
-                            <label class="col-sm-4 col-form-label">Name</label>
+                            <label class="col-sm-4 col-form-label" th:text="#{name}"></label>
                             <div class="col-sm-8">
                                 <input type="text" th:field="*{name}"
-                                       class="form-control mb-4 w-25" placeholder="Name"/>
+                                       class="form-control mb-4 w-25" th:placeholder="#{name}"/>
                                 <p th:if="${#fields.hasErrors('name')}" th:errorclass="text-danger"
                                    th:errors="${fuelStation.name}"></p>
                             </div>
                         </div>
 
                         <div class="row mb-3">
-                            <label class="col-sm-4 col-form-label">Code</label>
+                            <label class="col-sm-4 col-form-label" th:text="#{code}"></label>
                             <div class="col-sm-8">
                                 <input type="text" th:field="*{code}"
-                                       class="form-control mb-4 w-25" placeholder="Code"/>
+                                       class="form-control mb-4 w-25" th:placeholder="#{code}"/>
                             </div>
                         </div>
 
                         <div class="row mb-3">
-                            <label class="col-sm-4 col-form-label">Address</label>
+                            <label class="col-sm-4 col-form-label" th:text="#{address}"></label>
                             <div class="col-sm-8">
                                 <input type="text" th:field="*{address}"
-                                       class="form-control mb-4 w-25" placeholder="Address"/>
+                                       class="form-control mb-4 w-25" th:placeholder="#{address}"/>
                             </div>
                         </div>
 
                         <div class="row mb-3">
-                            <label class="col-sm-4 col-form-label">Telephone1</label>
+                            <label class="col-sm-4 col-form-label" th:text="#{telephone1}"></label>
                             <div class="col-sm-8">
                                 <input type="text" th:field="*{telephone1}"
-                                       class="form-control mb-4 w-25" placeholder="Telephone"/>
+                                       class="form-control mb-4 w-25" th:placeholder="#{telephone1}"/>
                             </div>
                         </div>
 
                         <div class="row mb-3">
-                            <label class="col-sm-4 col-form-label">Telephone2</label>
+                            <label class="col-sm-4 col-form-label" th:text="#{telephone2}"></label>
                             <div class="col-sm-8">
                                 <input type="text" th:field="*{telephone2}"
-                                       class="form-control mb-4 w-25" placeholder="Telephone2"/>
+                                       class="form-control mb-4 w-25" th:placeholder="#{telephone2}"/>
                             </div>
                         </div>
 
                         <div class="row mb-3">
-                            <label class="col-sm-4 col-form-label">Zip Code</label>
+                            <label class="col-sm-4 col-form-label" th:text="#{zipCode}"></label>
                             <div class="col-sm-8">
                                 <input type="text" th:field="*{zipCode}"
-                                       class="form-control mb-4 w-25" placeholder="Zip Code"/>
+                                       class="form-control mb-4 w-25" th:placeholder="#{zipCode}"/>
                             </div>
                         </div>
 
                         <div class="row mb-3">
-                        <label class="col-sm-4 col-form-label">Init Count</label>
+                        <label class="col-sm-4 col-form-label" th:text="#{initCount}"></label>
                             <div class="col-sm-8">
                             <input type="number" th:field="*{initCount}"
-                               name="Init Count" step="1" placeholder="Init Count"
+                               name="Init Count" step="1" th:placeholder="#{initCount}"
                                class="form-control mb-4 w-25">
                                 <p th:if="${#fields.hasErrors('initCount')}" th:errorclass="text-danger"
                                    th:errors="${fuelStation.initCount}"></p>
@@ -106,19 +108,19 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label class="col-sm-4 col-form-label">Open Date</label>
+                            <label class="col-sm-4 col-form-label" th:text="#{openDate}"></label>
                             <div class="col-sm-8">
                             <input type="time"
-                                   class="form-control mb-4 w-25" placeholder="Open Date"/>
+                                   class="form-control mb-4 w-25" th:placeholder="#{openDate}"/>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="offset-sm-4 col-sm-4 d-grid">
-                                <button type="submit" class="btn btn-primary">Save</button>
+                                <button type="submit" class="btn btn-primary" th:text="#{save}"></button>
                             </div>
                             <div class="col-sm-4 d-grid">
-                                <a role="button" class="btn btn-outline-primary" th:href="@{/fuelStations/list}">Cancel</a>
+                                <a role="button" class="btn btn-outline-primary" th:href="@{/fuelStations/list}" th:text="#{cancel}"></a>
                             </div>
                         </div>
                     </form>

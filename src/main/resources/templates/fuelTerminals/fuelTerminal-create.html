@@ -27,8 +27,10 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-md-8 mx-auto rounded border p-4 m-4">
-                    <h2 class="text-center mb-5">New Fuel Terminal</h2>
+                <div class="col-md-8 mx-auto rounded p-4 m-4">
+                    <div class="page-header">
+                        <h1 class="page-title">New Fuel Terminal</h1>
+                    </div>
 
                     <form action="#" enctype="multipart/form-data" th:method="POST" th:action="@{/fuelTerminals/save(path=${path})}"
                           th:object="${fuelTerminal}">

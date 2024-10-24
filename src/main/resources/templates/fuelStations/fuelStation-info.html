@@ -26,40 +26,38 @@
         </div>
 
         <div class="container" th:object="${fuelStation}">
-            <br>
 
             <div class="page-header">
                 <h1 class="page-title">Info Page</h1>
             </div>
 
-            <br>
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <p>ID : <span th:text="${fuelStation.id}"></span></p>
-                        <p>Zone ID : <span th:text="${fuelStation.zoneId}"></span></p>
-                        <p>Area ID : <span th:text="${fuelStation.areaId}"></span></p>
-                        <p>City ID : <span th:text="${fuelStation.cityId}"></span></p>
-                        <p>Code : <span th:text="${fuelStation.code}"></span></p>
-                        <p>Name : <span th:text="${fuelStation.name}"></span></p>
-                        <p>Type : <span th:text="${fuelStation.type}"></span></p>
-                        <p>Address : <span th:text="${fuelStation.address}"></span></p>
-                        <p>Incharge Man : <span th:text="${fuelStation.inchargeMan}"></span></p>
-                        <p>Email : <span th:text="${fuelStation.email}"></span></p>
-                        <p>Contact Man : <span th:text="${fuelStation.contactMan}"></span></p>
-                        <p>Contact Telephone : <span th:text="${fuelStation.contactTelephone}"></span></p>
-                        <p>Telephone1 : <span th:text="${fuelStation.telephone1}"></span></p>
-                        <p>Telephone2 : <span th:text="${fuelStation.telephone2}"></span></p>
-                        <p>Fax : <span th:text="${fuelStation.fax}"></span></p>
-                        <p>Zip Code : <span th:text="${fuelStation.zipCode}"></span></p>
-                        <p>Open Date : <span th:text="${fuelStation.openDate}"></span></p>
-                        <p>Init Count : <span th:text="${fuelStation.getInitCount}"></span></p>
-                        <p>Dialup Sign : <span th:text="${fuelStation.dialupSign}"></span></p>
-                        <p>DailySettle Begin : <span th:text="${fuelStation.dailySettleBegin}"></span></p>
-                        <p>DailySettle End : <span th:text="${fuelStation.dailySettleEnd}"></span></p>
-                        <p>Owner : <span th:text="${fuelStation.owner}"></span></p>
-                        <p>Init Status : <span th:text="${fuelStation.initStatus}"></span></p>
-                        <p>Validity : <span th:text="${fuelStation.validity}"></span></p>
+                        <p> - ID : <span th:text="${fuelStation.id}"></span></p>
+                        <p> - Zone ID : <span th:text="${fuelStation.zoneId}"></span></p>
+                        <p> - Area ID : <span th:text="${fuelStation.areaId}"></span></p>
+                        <p> - City ID : <span th:text="${fuelStation.cityId}"></span></p>
+                        <p> - Code : <span th:text="${fuelStation.code}"></span></p>
+                        <p> - Name : <span th:text="${fuelStation.name}"></span></p>
+                        <p> - Type : <span th:text="${fuelStation.type}"></span></p>
+                        <p> - Address : <span th:text="${fuelStation.address}"></span></p>
+                        <p> - Incharge Man : <span th:text="${fuelStation.inchargeMan}"></span></p>
+                        <p> - Email : <span th:text="${fuelStation.email}"></span></p>
+                        <p> - Contact Man : <span th:text="${fuelStation.contactMan}"></span></p>
+                        <p> - Contact Telephone : <span th:text="${fuelStation.contactTelephone}"></span></p>
+                        <p> - Telephone1 : <span th:text="${fuelStation.telephone1}"></span></p>
+                        <p> - Telephone2 : <span th:text="${fuelStation.telephone2}"></span></p>
+                        <p> - Fax : <span th:text="${fuelStation.fax}"></span></p>
+                        <p> - Zip Code : <span th:text="${fuelStation.zipCode}"></span></p>
+                        <p> - Open Date : <span th:text="${fuelStation.openDate}"></span></p>
+                        <p> - Init Count : <span th:text="${fuelStation.getInitCount}"></span></p>
+                        <p> - Dialup Sign : <span th:text="${fuelStation.dialupSign}"></span></p>
+                        <p> - DailySettle Begin : <span th:text="${fuelStation.dailySettleBegin}"></span></p>
+                        <p> - DailySettle End : <span th:text="${fuelStation.dailySettleEnd}"></span></p>
+                        <p> - Owner : <span th:text="${fuelStation.owner}"></span></p>
+                        <p> - Init Status : <span th:text="${fuelStation.initStatus}"></span></p>
+                        <p> - Validity : <span th:text="${fuelStation.validity}"></span></p>
 
 
                     </div>
@@ -67,9 +65,9 @@
             </div>
             <br>
 
-            <h3>Fuel Terminals</h3>
-
-            <br>
+            <div class="page-header">
+                <h1 class="page-title">Fuel Terminals</h1>
+            </div>
 
             <a th:href="@{/fuelTerminals/add(fuelStationId=${fuelStation.id})}"
                class="btn btn-primary btn-sm mb-3">
