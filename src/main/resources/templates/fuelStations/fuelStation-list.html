@@ -52,7 +52,10 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title" th:text="#{fuelStations}"></h3>
+                                    <a th:href="@{/fuelStations/add}"
+                                       class="btn btn-primary btn-sm mb-3">
+                                        Add FuelStation
+                                    </a>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -190,7 +193,11 @@
 <!-- CUSTOM JS -->
 <script src="../assets/js/custom.js"></script>
 
-
+<script>
+    function redirectTo(url) {
+        window.location.href = url;
+    }
+</script>
 
 </body>
 
