@@ -33,22 +33,6 @@
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="../static/assets/colors/color1.css" th:href="@{/assets/colors/color1.css}" />
 
 
-    <style>
-        .header-side-image{
-
-            /*border: 1px solid #ddd;*/
-            border-radius: 4px;
-            padding: 40px;
-            width: 150px;
-
-        }
-
-        .header-side-image-disable {
-            position: absolute;
-            top:25%;
-        }
-    </style>
-
 </head>
 
 <body class="app sidebar-mini ltr light-mode">
@@ -107,7 +91,7 @@
                                             <a class="nav-link icon text-center" data-bs-target="#country-selector"
                                                 data-bs-toggle="modal">
                                                 <i class="fe fe-globe"></i><span
-                                                    class="fs-16 ms-2 d-none d-xl-block">English</span>
+                                                    class="fs-16 ms-2 d-none d-xl-block" th:text="#{language}"></span>
                                             </a>
                                         </div>
                                         <!-- COUNTRY -->
@@ -130,29 +114,25 @@
                                         <!-- SIDE-MENU -->
                                         <div class="dropdown d-flex profile-1">
                                             <a href="javascript:void(0)" data-bs-toggle="dropdown" class="nav-link leading-none d-flex">
-                                                <img src="../assets/images/users/21.jpg" alt="profile-user"
-                                                    class="avatar  profile-user brround cover-image">
+                                                <img src="../static/assets/images/users/21.jpg" th:src="@{/assets/images/users/21.jpg}" alt="profile-user"
+                                                     class="avatar  profile-user brround cover-image">
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                                 <div class="drop-heading">
                                                     <div class="text-center">
-                                                        <h5 class="text-dark mb-0 fs-14 fw-semibold">Percy Kewshun</h5>
-                                                        <small class="text-muted">Senior Admin</small>
+                                                        <h5 class="text-dark mb-0 fs-14 fw-semibold">admin</h5>
+                                                        <small class="text-muted">admin</small>
                                                     </div>
                                                 </div>
                                                 <div class="dropdown-divider m-0"></div>
-                                                <a class="dropdown-item" href="profile.html">
-                                                    <i class="dropdown-icon fe fe-user"></i> Profile
+                                                <a class="dropdown-item" href="profile.html" th:text="#{profile}">
+                                                    <i class="dropdown-icon fe fe-user"></i>
                                                 </a>
-                                                <a class="dropdown-item" href="email-inbox.html">
-                                                    <i class="dropdown-icon fe fe-mail"></i> Inbox
-                                                    <span class="badge bg-danger rounded-pill float-end">5</span>
-                                                </a>
-                                                <a class="dropdown-item" href="lockscreen.html">
-                                                    <i class="dropdown-icon fe fe-lock"></i> Lockscreen
-                                                </a>
-                                                <a class="dropdown-item" href="login.html">
-                                                    <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
+                                                <a class="dropdown-item" href="javascript: document.logoutForm.submit()" th:text="#{logout}">
+                                                    <i class="dropdown-icon fe fe-alert-circle"></i>
+                                                    <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+                                                        <input hidden type="submit" value="Sign Out"/>
+                                                    </form>
                                                 </a>
                                             </div>
                                         </div>
@@ -1806,7 +1786,7 @@
                     <div class="modal-body">
                         <ul class="row p-3">
                             <li class="col-lg-6 mb-2">
-                                <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block active"
+                                <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block"
                                    th:href="@{/(lang=#{lang.change.en})}">
                                     <span class="country-selector"><img alt="" src="../assets/images/flags/us_flag.jpg"
                                             class="me-3 language"></span>English

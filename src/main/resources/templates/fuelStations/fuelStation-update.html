@@ -1,111 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>FuelStation Form</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<head th:replace="~{admin-panel/index :: head}">
+
 </head>
-<body>
+<body class="app sidebar-mini ltr light-mode">
+<!-- GLOBAL-LOADER -->
+<div id="global-loader">
+    <img src="../assets/images/loader.svg" class="loader-img" alt="Loader">
+</div>
+<!-- /GLOBAL-LOADER -->
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 mx-auto rounded border p-4 m-4">
-            <h2 class="text-center mb-5">Update Fuel Station</h2>
+<!-- PAGE -->
+<div class="page">
+    <div class="page-main">
 
-            <form action="#" enctype="multipart/form-data" th:method="POST" th:action="@{/fuelStations/update}"
-                  th:object="${fuelStation}">
+        <!-- app-Header -->
+        <div class="app-header header sticky" th:replace="~{admin-panel/index :: app-header}">
 
-                <!-- Add hidden form field to handle the update -->
-                <div class="row mb-3">
-                    <label class="col-sm-4 col-form-label">ID</label>
-                    <div class="col-sm-8">
-                        <input type="text" th:field="*{id}" readonly
-                               class="form-control mb-4 w-25" placeholder="ID"/>
-                    </div>
+        </div>
+        <!-- /app-Header -->
+
+        <!--APP-SIDEBAR-->
+        <div class="sticky" th:replace="~{admin-panel/index :: sidebar}">
+            <!--/APP-SIDEBAR-->
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 mx-auto rounded border p-4 m-4">
+                    <h2 class="text-center mb-5">Update Fuel Station</h2>
+
+                    <form action="#" enctype="multipart/form-data" th:method="POST" th:action="@{/fuelStations/update}"
+                          th:object="${fuelStation}">
+
+                        <!-- Add hidden form field to handle the update -->
+                        <div class="row mb-3">
+                            <label class="col-sm-4 col-form-label">ID</label>
+                            <div class="col-sm-8">
+                                <input type="text" th:field="*{id}" readonly
+                                       class="form-control mb-4 w-25" placeholder="ID"/>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label class="col-sm-4 col-form-label">Name</label>
+                            <div class="col-sm-8">
+                                <input type="text" th:field="*{name}"
+                                       class="form-control mb-4 w-25" placeholder="Name"/>
+                                <p th:if="${#fields.hasErrors('name')}" th:errorclass="text-danger"
+                                   th:errors="${fuelStation.name}"></p>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label class="col-sm-4 col-form-label">Code</label>
+                            <div class="col-sm-8">
+                                <input type="text" th:field="*{code}"
+                                       class="form-control mb-4 w-25" placeholder="Code"/>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label class="col-sm-4 col-form-label">Address</label>
+                            <div class="col-sm-8">
+                                <input type="text" th:field="*{address}"
+                                       class="form-control mb-4 w-25" placeholder="Address"/>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label class="col-sm-4 col-form-label">Telephone1</label>
+                            <div class="col-sm-8">
+                                <input type="text" th:field="*{telephone1}"
+                                       class="form-control mb-4 w-25" placeholder="Telephone"/>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label class="col-sm-4 col-form-label">Telephone2</label>
+                            <div class="col-sm-8">
+                                <input type="text" th:field="*{telephone2}"
+                                       class="form-control mb-4 w-25" placeholder="Telephone2"/>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label class="col-sm-4 col-form-label">Zip Code</label>
+                            <div class="col-sm-8">
+                                <input type="text" th:field="*{zipCode}"
+                                       class="form-control mb-4 w-25" placeholder="Zip Code"/>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label class="col-sm-4 col-form-label">Init Count</label>
+                            <div class="col-sm-8">
+                                <input type="number" th:field="*{initCount}"
+                                       name="Init Count" step="1" placeholder="Init Count"
+                                       class="form-control mb-4 w-25">
+                                <p th:if="${#fields.hasErrors('initCount')}" th:errorclass="text-danger"
+                                   th:errors="${fuelStation.initCount}"></p>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label class="col-sm-4 col-form-label">Open Date</label>
+                            <div class="col-sm-8">
+                                <input type="time"
+                                       class="form-control mb-4 w-25" placeholder="Open Date"/>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="offset-sm-4 col-sm-4 d-grid">
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                            <div class="col-sm-4 d-grid">
+                                <a role="button" class="btn btn-outline-primary" th:href="@{/fuelStations/list}">Cancel</a>
+                            </div>
+                        </div>
+                    </form>
                 </div>
+            </div>
+        </div>
 
-                <div class="row mb-3">
-                    <label class="col-sm-4 col-form-label">Name</label>
-                    <div class="col-sm-8">
-                        <input type="text" th:field="*{name}"
-                               class="form-control mb-4 w-25" placeholder="Name"/>
-                        <p th:if="${#fields.hasErrors('name')}" th:errorclass="text-danger"
-                           th:errors="${fuelStation.name}"></p>
-                    </div>
-                </div>
+    </div>
 
-                <div class="row mb-3">
-                    <label class="col-sm-4 col-form-label">Code</label>
-                    <div class="col-sm-8">
-                        <input type="text" th:field="*{code}"
-                               class="form-control mb-4 w-25" placeholder="Code"/>
-                    </div>
+    <!-- Country-selector modal-->
+    <div class="modal fade" id="country-selector">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content country-select-modal">
+                <div class="modal-header">
+                    <h6 class="modal-title">Choose Country</h6><button aria-label="Close" class="btn-close"
+                                                                       data-bs-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
                 </div>
-
-                <div class="row mb-3">
-                    <label class="col-sm-4 col-form-label">Address</label>
-                    <div class="col-sm-8">
-                        <input type="text" th:field="*{address}"
-                               class="form-control mb-4 w-25" placeholder="Address"/>
-                    </div>
+                <div class="modal-body">
+                    <ul class="row p-3" th:object="${fuelStation}">
+                        <li class="col-lg-6 mb-2">
+                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block"
+                               th:href="@{/fuelStations/update(fuelStationId=*{id},lang=#{lang.change.en})}">
+                                    <span class="country-selector"><img alt="" src="../assets/images/flags/us_flag.jpg"
+                                                                        class="me-3 language"></span>English
+                            </a>
+                        </li>
+                        <li class="col-lg-6 mb-2">
+                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block"
+                               th:href="@{/fuelStations/update(fuelStationId=*{id},lang=#{lang.change.fa})}">
+                                    <span class="country-selector"><img alt=""
+                                                                        src="../assets/images/flags/ir.svg"
+                                                                        class="me-3 language"></span>Persian
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-
-                <div class="row mb-3">
-                    <label class="col-sm-4 col-form-label">Telephone1</label>
-                    <div class="col-sm-8">
-                        <input type="text" th:field="*{telephone1}"
-                               class="form-control mb-4 w-25" placeholder="Telephone"/>
-                    </div>
-                </div>
-
-                <div class="row mb-3">
-                    <label class="col-sm-4 col-form-label">Telephone2</label>
-                    <div class="col-sm-8">
-                        <input type="text" th:field="*{telephone2}"
-                               class="form-control mb-4 w-25" placeholder="Telephone2"/>
-                    </div>
-                </div>
-
-                <div class="row mb-3">
-                    <label class="col-sm-4 col-form-label">Zip Code</label>
-                    <div class="col-sm-8">
-                        <input type="text" th:field="*{zipCode}"
-                               class="form-control mb-4 w-25" placeholder="Zip Code"/>
-                    </div>
-                </div>
-
-                <div class="row mb-3">
-                    <label class="col-sm-4 col-form-label">Init Count</label>
-                    <div class="col-sm-8">
-                        <input type="number" th:field="*{initCount}"
-                               name="Init Count" step="1" placeholder="Init Count"
-                               class="form-control mb-4 w-25">
-                        <p th:if="${#fields.hasErrors('initCount')}" th:errorclass="text-danger"
-                           th:errors="${fuelStation.initCount}"></p>
-                    </div>
-                </div>
-
-                <div class="row mb-3">
-                    <label class="col-sm-4 col-form-label">Open Date</label>
-                    <div class="col-sm-8">
-                        <input type="time"
-                               class="form-control mb-4 w-25" placeholder="Open Date"/>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="offset-sm-4 col-sm-4 d-grid">
-                        <button type="submit" class="btn btn-primary">Save</button>
-                    </div>
-                    <div class="col-sm-4 d-grid">
-                        <a role="button" class="btn btn-outline-primary" th:href="@{/fuelStations/list}">Cancel</a>
-                    </div>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
+    <!-- Country-selector modal-->
+
+    <!-- FOOTER -->
+    <footer class="footer" th:replace="~{admin-panel/index :: app-footer}">
+
+    </footer>
+
+    <!-- FOOTER CLOSED -->
+
 </div>
+
+<!-- JQUERY JS -->
+<script src="../assets/js/jquery.min.js"></script>
+
+<!-- BOOTSTRAP JS -->
+<script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
+<script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- SIDE-MENU JS -->
+<script src="../assets/plugins/sidemenu/sidemenu.js"></script>
+
+<!-- TypeHead js -->
+<script src="../assets/plugins/bootstrap5-typehead/autocomplete.js"></script>
+<script src="../assets/js/typehead.js"></script>
+
+<!-- SIDEBAR JS -->
+<script src="../assets/plugins/sidebar/sidebar.js"></script>
+
+<!-- Perfect SCROLLBAR JS-->
+<script src="../assets/plugins/p-scroll/perfect-scrollbar.js"></script>
+<script src="../assets/plugins/p-scroll/pscroll.js"></script>
+<script src="../assets/plugins/p-scroll/pscroll-1.js"></script>
+
+<!-- INTERNAL SELECT2 JS -->
+<script src="../assets/plugins/select2/select2.full.min.js"></script>
+
+<!-- INTERNAL Data tables js-->
+<script src="../assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
+<script src="../assets/plugins/datatable/js/dataTables.bootstrap5.js"></script>
+<script src="../assets/plugins/datatable/dataTables.responsive.min.js"></script>
+<script src="../assets/js/crypto-datatable.js"></script>
+
+<!-- Color Theme js -->
+<script src="../assets/js/themeColors.js"></script>
+
+<!-- Sticky js -->
+<script src="../assets/js/sticky.js"></script>
+
+<!-- CUSTOM JS -->
+<script src="../assets/js/custom.js"></script>
 
 </body>
 </html>
