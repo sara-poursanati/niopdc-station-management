@@ -1,0 +1,20 @@
+#ltr #sidebar {
+    direction: ltr;
+    text-align: left;
+    float: left;
+    margin-left: 0;
+    margin-right: auto;
+    position: absolute;
+    left: 0;
+    right: unset;
+}
+
+
+#ltr #index-content {
+    direction: ltr;
+    text-align: left;
+}
+
+#ltr #header {
+    direction: ltr;
+}

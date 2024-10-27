@@ -1,0 +1,39 @@
+#rtl #sidebar {
+    direction: rtl;
+    text-align: right;
+    float: right;
+    margin-right: 0;
+    margin-left: auto;
+    position: absolute;
+    right: 0;
+    left: unset;
+}
+
+
+#rtl #index-content {
+    direction: rtl;
+    text-align: right;
+}
+
+#rtl #header {
+    direction: rtl;
+}
+
+#rtl #header-icons {
+    direction: rtl;
+    margin-right: 70rem;
+    margin-left: auto;
+}
+
+#rtl #header-icons-profile-menu {
+    direction: ltr;
+}
+
+
+/*#rtl {*/
+/*    @media (min-width: 1400px) {*/
+/*        &.layout-boxed .app-sidebar {*/
+/*            right: auto !important;*/
+/*        }*/
+/*    }*/
+/*}*/

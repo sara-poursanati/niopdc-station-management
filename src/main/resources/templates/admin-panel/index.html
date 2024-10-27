@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" dir="ltr">
+<html th:attr="dir=${#locale.language == 'fa' ? 'rtl' : 'ltr'}" th:lang="${#locale.language}">
 
 <head  th:fragment="head">
 
@@ -32,10 +32,11 @@
     <!-- COLOR SKIN CSS -->
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="../static/assets/colors/color1.css" th:href="@{/assets/colors/color1.css}" />
 
+    <link th:href="@{${#locale.language == 'fa' ? '/assets/css/style-rtl.css' : '/assets/css/style-ltr.css'}}" rel="stylesheet">
 
 </head>
 
-<body class="app sidebar-mini ltr light-mode">
+<body class="app sidebar-mini ltr light-mode" th:id="${#locale.language == 'fa' ? 'rtl' : 'ltr'}">
 
     <!-- GLOBAL-LOADER -->
     <div id="global-loader">
@@ -48,7 +49,7 @@
         <div class="page-main">
 
             <!-- app-Header -->
-            <div class="app-header header sticky" th:fragment="app-header">
+            <div class="app-header header sticky" th:fragment="app-header"  id="header">
                 <div class="container-fluid main-container">
                     <div class="d-flex">
                         <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-bs-toggle="sidebar" href="javascript:void(0)"></a>
@@ -87,6 +88,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div id="header-icons" class="d-flex order-lg-2">
                                         <div class="d-flex country">
                                             <a class="nav-link icon text-center" data-bs-target="#country-selector"
                                                 data-bs-toggle="modal">
@@ -117,7 +119,7 @@
                                                 <img src="../static/assets/images/users/21.jpg" th:src="@{/assets/images/users/21.jpg}" alt="profile-user"
                                                      class="avatar  profile-user brround cover-image">
                                             </a>
-                                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow"  id="header-icons-profile-menu">
                                                 <div class="drop-heading">
                                                     <div class="text-center">
                                                         <h5 class="text-dark mb-0 fs-14 fw-semibold">admin</h5>
@@ -136,6 +138,7 @@
                                                 </a>
                                             </div>
                                         </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -146,7 +149,7 @@
             <!-- /app-Header -->
 
             <!--APP-SIDEBAR-->
-            <div class="sticky" th:fragment="sidebar">
+            <div class="sticky" th:fragment="sidebar" id="sidebar">
                 <div class="app-sidebar__overlay" data-bs-toggle="sidebar"></div>
                 <div class="app-sidebar">
                     <div class="side-header">
@@ -212,7 +215,7 @@
             </div>
 
             <!--app-content open-->
-            <div class="main-content app-content mt-0">
+            <div class="main-content app-content mt-0"  id="index-content">
                 <div class="side-app">
 
                     <!-- CONTAINER -->
@@ -1780,7 +1783,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content country-select-modal">
                     <div class="modal-header">
-                        <h6 class="modal-title">Choose Country</h6><button aria-label="Close" class="btn-close"
+                        <h6 class="modal-title">Choose Language</h6><button aria-label="Close" class="btn-close"
                             data-bs-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
                     </div>
                     <div class="modal-body">
