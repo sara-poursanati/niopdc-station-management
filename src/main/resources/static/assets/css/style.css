@@ -203,20 +203,6 @@ License        :   Licensed under ThemeForest License
     box-sizing: border-box;
 }
 
-.header-side-image{
-
-    /*border: 1px solid #ddd;*/
-    border-radius: 4px;
-    padding: 40px;
-    width: 150px;
-
-}
-
-.header-side-image-disable {
-    position: absolute;
-    top:25%;
-}
-
 *::before,
 *::after {
     box-sizing: border-box;
@@ -17443,7 +17429,7 @@ table.table-bordered.dataTable thead tr:first-child td {
 }
 
 .login100-form-title {
-    font-size: 24px;
+    font-size: 16px;
     line-height: 1.2;
     text-align: center;
     width: 100%;
@@ -23460,7 +23446,7 @@ ul.timeline>li:before {
 }
 
 .header-brand-img {
-    line-height: 3rem;
+    line-height: 2rem;
     vertical-align: middle;
     width: auto;
 }

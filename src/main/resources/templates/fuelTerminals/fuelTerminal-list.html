@@ -5,7 +5,7 @@
 
 </head>
 
-<body class="app sidebar-mini ltr light-mode">
+<body class="app sidebar-mini light-mode" th:classappend="${#locale.language == 'fa' ? 'rtl' : 'ltr'}">
 
     <!-- GLOBAL-LOADER -->
     <div id="global-loader">

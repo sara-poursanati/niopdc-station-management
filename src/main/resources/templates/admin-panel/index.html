@@ -36,7 +36,7 @@
 
 </head>
 
-<body class="app sidebar-mini ltr light-mode" th:id="${#locale.language == 'fa' ? 'rtl' : 'ltr'}">
+<body class="app sidebar-mini light-mode" th:classappend="${#locale.language == 'fa' ? 'rtl' : 'ltr'}" th:id="${#locale.language == 'fa' ? 'rtl' : 'ltr'}">
 
     <!-- GLOBAL-LOADER -->
     <div id="global-loader">
@@ -88,7 +88,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div id="header-icons" class="d-flex order-lg-2">
+                                        <div id="header-icons" class="d-flex order-lg-2 navbar navbar-collapse responsive-navbar p-0">
                                         <div class="d-flex country">
                                             <a class="nav-link icon text-center" data-bs-target="#country-selector"
                                                 data-bs-toggle="modal">
@@ -1797,7 +1797,7 @@
                             </li>
                             <li class="col-lg-6 mb-2">
                                 <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block"
-                                th:href="@{/(lang=#{lang.change.fa})}">
+                                th:href="@{/(lang=#{lang.change.fa})}" >
                                     <span class="country-selector"><img alt=""
                                         src="../assets/images/flags/ir.svg"
                                         class="me-3 language"></span>Persian
@@ -1905,6 +1905,8 @@
         <!-- GENERATE OTP JS -->
         <script src="../assets/js/generate-otp.js"></script>
     </th:block>
+
+
 </body>
 
 </html>
