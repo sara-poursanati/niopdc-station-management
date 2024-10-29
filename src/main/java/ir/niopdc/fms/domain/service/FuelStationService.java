@@ -63,5 +63,16 @@ public class FuelStationService extends BaseService<FuelStationRepository, FuelS
         }
     }
 
+    public List<FuelStationGetDTO> findFuelStationBySearchText(String name) {
+
+        if (name.isEmpty()) {
+            return null;
+        }
+
+        var result =
+                FuelStationMapper.mapToFuelStationGetDTOs(getRepository().findBySearchText(name));
+        return result;
+    }
+
 
 }

@@ -4,7 +4,7 @@
 <head th:replace="~{admin-panel/index :: head}">
 </head>
 
-<body class="app sidebar-mini ltr login-img">
+<body class="app sidebar-mini login-img" th:classappend="${#locale.language == 'fa' ? 'rtl' : 'ltr'}">
 
     <!-- BACKGROUND-IMAGE -->
     <div class="">

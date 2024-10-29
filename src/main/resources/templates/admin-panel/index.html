@@ -61,8 +61,8 @@
                         </a>
                         <!-- LOGO -->
                         <div class="main-header-center ms-3 d-none d-lg-block">
-                            <input type="text" class="form-control" id="typehead" placeholder="Search for results...">
-                            <button class="btn px-0 pt-2"><i class="fe fe-search" aria-hidden="true"></i></button>
+                            <input type="text" class="form-control" id="typehead" th:placeholder="#{search}">
+                            <button onclick="search()" class="btn px-0 pt-2"><i class="fe fe-search" aria-hidden="true"></i></button>
                         </div>
                         <div class="d-flex order-lg-2 ms-auto header-right-icons">
                             <!-- SEARCH -->
@@ -76,12 +76,12 @@
                                 <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
                                     <div class="d-flex order-lg-2">
                                         <div class="dropdown d-lg-none d-flex">
-                                            <a href="javascript:void(0)" class="nav-link icon" data-bs-toggle="dropdown">
+                                            <a class="nav-link icon" data-bs-toggle="dropdown" >
                                                 <i class="fe fe-search"></i>
                                             </a>
-                                            <div class="dropdown-menu header-search dropdown-menu-start">
+                                            <div class="dropdown-menu header-search dropdown-menu-start" id="search-button">
                                                 <div class="input-group w-100 p-2">
-                                                    <input type="text" class="form-control" placeholder="Search....">
+                                                    <input type="text" class="form-control" th:placeholder="#{search}">
                                                     <div class="input-group-text btn btn-primary">
                                                         <i class="fa fa-search" aria-hidden="true"></i>
                                                     </div>
@@ -1906,6 +1906,18 @@
         <script src="../assets/js/generate-otp.js"></script>
     </th:block>
 
+    <script th:fragment="search-script">
+
+        function search() {
+            var input = document.getElementById("typehead")
+
+            var name = input.value;
+
+            window.location.href = "/?searchedWord=" + name;
+
+        }
+
+    </script>
 
 </body>
 
