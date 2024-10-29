@@ -27,9 +27,5 @@ public class MainController {
         return "admin-panel/index";
     }
 
-    @RequestMapping("/test")
-    public String showTest() {
-        return "admin-panel/form-elements";
-    }
 
 }

@@ -133,7 +133,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content country-select-modal">
                 <div class="modal-header">
-                    <h6 class="modal-title">Choose Country</h6><button aria-label="Close" class="btn-close"
+                    <h6 class="modal-title" th:text="#{chooseLanguage}"></h6><button aria-label="Close" class="btn-close"
                                                                        data-bs-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
@@ -141,16 +141,16 @@
                         <li class="col-lg-6 mb-2">
                             <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block"
                                th:href="@{/fuelStations/update(fuelStationId=*{id},lang=#{lang.change.en})}">
-                                    <span class="country-selector"><img alt="" src="../assets/images/flags/us_flag.jpg"
-                                                                        class="me-3 language"></span>English
+                                    <span class="country-selector"><img alt="" src="../assets/images/flags/us_flag.jpg" th:text="#{english}"
+                                                                        class="me-3 language"></span>
                             </a>
                         </li>
                         <li class="col-lg-6 mb-2">
                             <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block"
                                th:href="@{/fuelStations/update(fuelStationId=*{id},lang=#{lang.change.fa})}">
                                     <span class="country-selector"><img alt=""
-                                                                        src="../assets/images/flags/ir.svg"
-                                                                        class="me-3 language"></span>Persian
+                                                                        src="../assets/images/flags/ir.svg" th:text="#{persian}"
+                                                                        class="me-3 language"></span>
                             </a>
                         </li>
                     </ul>
