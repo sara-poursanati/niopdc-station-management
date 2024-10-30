@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" dir="ltr">
+<html th:lang="${#locale.language}" th:attr="dir=${#locale.language == 'fa' ? 'rtl' : 'ltr'}">
 
 <head th:replace="~{admin-panel/index :: head}">
 
@@ -51,9 +51,9 @@
                             <div class="col-md-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <a th:href="@{/fuelTerminals/add}"
+                                        <a th:href="@{/fuelTerminals/add}" th:text="#{addFuelTerminal}"
                                            class="btn btn-primary btn-sm mb-3">
-                                            Add FuelTerminal
+
                                         </a>
                                     </div>
                                     <div class="card-body">
@@ -75,6 +75,8 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                <tr th:if="${fuelTerminals == null}" th:text="#{noDataAvailableInTable}"></tr>
+<!--                                                <tr th:unless="${teacher.gender == 'F'}">Male</tr>-->
                                                 <tr th:each="tempFuelTerminal : ${fuelTerminals}"
                                                     th:onclick="|redirectTo('@{/fuelTerminals/info(fuelTerminalId=${tempFuelTerminal.id})}')|">
                                                     <td th:text="${tempFuelTerminal.id}"></td>
@@ -87,18 +89,17 @@
                                                     <td th:text="${tempFuelTerminal.nozzleId}"></td>
                                                     <td th:text="${tempFuelTerminal.oilcanId}"></td>
                                                     <td th:text="${tempFuelTerminal.dispenserType}"></td>
-                                                    <td class="center-text">
-                                                        <a th:href="@{/fuelTerminals/update(fuelTerminalId=${tempFuelTerminal.id})}"
-                                                           class="btn btn-info" th:text="#{edit}">
-
-                                                        </a>
-
-                                                        <a th:href="@{/fuelTerminals/delete(fuelTerminalId=${tempFuelTerminal.id})}"
-                                                           class="btn btn-danger" th:text="#{delete}"
-                                                           onclick="if (!(confirm('Are you sure you want to delete this fuel terminal?'))) return false"
-                                                        >
-
-                                                        </a>
+                                                    <td>
+                                                        <div class="g-2">
+                                                            <a class="btn text-primary btn-sm" th:href="@{/fuelTerminals/update(fuelTerminalId=${tempFuelTerminal.id})}"
+                                                               data-bs-toggle="tooltip"
+                                                               th:data-bs-original-title="#{edit}"><span
+                                                                    class="fe fe-edit fs-14"></span></a>
+                                                            <a class="btn text-danger btn-sm" th:href="@{/fuelTerminals/delete(fuelTerminalId=${tempFuelTerminal.id})}"
+                                                               data-bs-toggle="tooltip"
+                                                               th:data-bs-original-title="#{delete}"><span
+                                                                    class="fe fe-trash-2 fs-14"></span></a>
+                                                        </div>
                                                     </td>
                                                 </tr>
 

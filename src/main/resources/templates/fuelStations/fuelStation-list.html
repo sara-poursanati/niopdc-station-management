@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" dir="ltr">
+<html th:lang="${#locale.language}" th:attr="dir=${#locale.language == 'fa' ? 'rtl' : 'ltr'}">
 
 <head th:replace="~{admin-panel/index :: head}">
 
@@ -52,9 +52,9 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <a th:href="@{/fuelStations/add}"
+                                    <a th:href="@{/fuelStations/add}" th:text="#{addFuelStation}"
                                        class="btn btn-primary btn-sm mb-3">
-                                        Add FuelStation
+
                                     </a>
                                 </div>
                                 <div class="card-body">
@@ -78,20 +78,20 @@
                                                 <td th:text="${tempFuelStation.code}"></td>
                                                 <td th:text="${tempFuelStation.address}"></td>
                                                 <td th:text="${tempFuelStation.telephone1}"></td>
-                                                <td class="center-text">
-                                                    <a th:href="@{/fuelStations/update(fuelStationId=${tempFuelStation.id})}"
-                                                       class="btn btn-info" th:text="#{edit}">
-                                                    </a>
-
-                                                    <a th:href="@{/fuelStations/delete(fuelStationId=${tempFuelStation.id})}"
-                                                       class="btn btn-danger" th:text="#{delete}"
-                                                       onclick="if (!(confirm('Are you sure you want to delete this fuel station?'))) return false"
-                                                    >
-                                                    </a>
-
-                                                    <a th:href="@{/fuelTerminals/add(fuelStationId=${tempFuelStation.id})}"
-                                                       class="btn btn-dark" th:text="#{addFuelTerminal}">
-                                                    </a>
+                                                <td>
+                                                    <div class="g-2">
+                                                        <a class="btn text-primary btn-sm" th:href="@{/fuelStations/update(fuelStationId=${tempFuelStation.id})}"
+                                                           data-bs-toggle="tooltip"
+                                                           th:data-bs-original-title="#{edit}"><span
+                                                                class="fe fe-edit fs-14"></span></a>
+                                                        <a class="btn text-danger btn-sm" th:href="@{/fuelStations/delete(fuelStationId=${tempFuelStation.id})}"
+                                                           data-bs-toggle="tooltip"
+                                                           th:data-bs-original-title="#{delete}"><span
+                                                                class="fe fe-trash-2 fs-14"></span></a>
+                                                        <a th:href="@{/fuelTerminals/add(fuelStationId=${tempFuelStation.id})}"
+                                                           class="btn btn-dark" th:text="#{addFuelTerminal}">
+                                                        </a>
+                                                    </div>
                                                 </td>
                                             </tr>
 

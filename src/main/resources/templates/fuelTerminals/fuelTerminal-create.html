@@ -29,7 +29,7 @@
             <div class="row">
                 <div class="col-md-8 mx-auto rounded p-4 m-4">
                     <div class="page-header">
-                        <h1 class="page-title">New Fuel Terminal</h1>
+                        <h1 class="page-title" th:text="#{newFuelTerminal}"></h1>
                     </div>
 
                     <form action="#" enctype="multipart/form-data" th:method="POST" th:action="@{/fuelTerminals/save(path=${path})}"
@@ -41,25 +41,25 @@
 
 
                         <div class="row mb-3">
-                            <label class="col-sm-4 col-form-label">ID</label>
+                            <label class="col-sm-4 col-form-label" th:text="#{id}"></label>
                             <div class="col-sm-8">
                                 <input type="text" th:field="*{id}"
-                                       class="form-control mb-4 w-25" placeholder="ID"/>
+                                       class="form-control mb-4 w-25" th:placeholder="#{id}"/>
                                 <p th:if="${#fields.hasErrors('id')}" th:errorclass="text-danger"
                                    th:errors="${fuelTerminal.id}"></p>
                             </div>
                         </div>
 
                             <div class="row mb-3">
-                                <label class="col-sm-4 col-form-label">FuelStation ID</label>
+                                <label class="col-sm-4 col-form-label" th:text="#{fuelStationId}"></label>
                                 <div class="col-sm-8">
                                     <div th:if="${theFuelStationId == null}">
                                     <input type="text" th:field="*{fuelStationId}"
-                                           class="form-control mb-4 w-25" placeholder="FuelStation ID"/>
+                                           class="form-control mb-4 w-25" th:placeholder="#{fuelStationId}"/>
                                     </div>
                                     <div th:if="${theFuelStationId != null}" th:statement="${fuelTerminal.setFuelStationId(theFuelStationId)}">
                                         <input type="text" th:field="*{fuelStationId}" readonly
-                                               class="form-control mb-4 w-25" placeholder="FuelStation ID"/>
+                                               class="form-control mb-4 w-25" th:placeholder="#{fuelStationId}"/>
                                     </div>
                                     <p th:if="${#fields.hasErrors('fuelStationId')}" th:errorclass="text-danger"
                                        th:errors="${fuelTerminal.fuelStationId}"></p>
@@ -82,10 +82,10 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label class="col-sm-4 col-form-label">Fuel Type</label>
+                            <label class="col-sm-4 col-form-label" th:text="#{fuelType}"></label>
                             <div class="col-sm-8">
                                 <input type="text" th:field="*{fuelType}"
-                                       class="form-control mb-4 w-25" placeholder="Fuel Type"/>
+                                       class="form-control mb-4 w-25" th:placeholder="#{fuelType}"/>
                             </div>
                         </div>
 
@@ -123,15 +123,15 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label class="col-sm-4 col-form-label">Dispenser Type</label>
+                            <label class="col-sm-4 col-form-label" th:text="#{dispenserType}"></label>
                             <div class="col-sm-8">
                                 <input type="text" th:field="*{dispenserType}"
-                                       class="form-control mb-4 w-25" placeholder="Dispenser Type"/>
+                                       class="form-control mb-4 w-25" th:placeholder="#{dispenserType}"/>
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="offset-sm-4 col-sm-4 d-grid">
+                            <div class="col-sm-4 d-grid">
                                 <button type="submit" class="btn btn-primary">Save</button>
                             </div>
                             <div class="col-sm-4 d-grid">
