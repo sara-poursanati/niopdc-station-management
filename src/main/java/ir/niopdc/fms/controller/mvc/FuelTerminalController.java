@@ -32,14 +32,14 @@ public class FuelTerminalController {
     }
 
     @GetMapping("/list")
-    public String listFuelStation(Model theModel) {
+    public String showListFuelTerminal(Model theModel) {
         // get the fuelTerminals from DB
         List<FuelTerminalGetDTO> theFuelTerminals = fuelTerminalService.findAllFuelTerminal();
 
         // add to the spring model
         theModel.addAttribute("fuelTerminals", theFuelTerminals);
 
-        return "admin-panel/fuelTerminal-list";
+        return "fuelTerminals/fuelTerminal-list";
     }
 
     @GetMapping("/add")
