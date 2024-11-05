@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" dir="rtl" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/template :: head}">
+</head>
+
+<body class="app sidebar-mini rtl light-mode">
+
+    <!-- GLOBAL-LOADER -->
+    <div id="global-loader" th:replace="~{fragments/template :: global-loader}">
+    </div>
+    <!-- /GLOBAL-LOADER -->
+
+    <!-- PAGE -->
+    <div class="page">
+        <div class="page-main">
+
+            <!-- app-Header -->
+            <div class="app-header header sticky" th:replace="~{fragments/template :: app-header}">
+            </div>
+            <!-- /app-Header -->
+
+            <!--APP-SIDEBAR-->
+            <div class="sticky" th:replace="~{fragments/template :: app-sidebar}">
+            </div>
+
+            <!--app-content open-->
+            <div class="main-content app-content mt-0">
+                <div class="side-app">
+                    <!-- CONTAINER -->
+                    <div class="main-container container-fluid">
+                    </div>
+                    <!-- CONTAINER END -->
+                </div>
+            </div>
+            <!--app-content close-->
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="footer" th:replace="~{fragments/template :: app-footer}">
+        </footer>
+        <!-- FOOTER END -->
+
+    </div>
+
+    <!-- BACK-TO-TOP -->
+    <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
+
+    <div th:replace="~{fragments/template :: scripts}">
+    </div>
+
+</body>
+
+</html>
