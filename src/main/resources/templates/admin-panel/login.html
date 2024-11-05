@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+
+<head th:replace="~{admin-panel/index :: head}">
+</head>
+
+<body class="app sidebar-mini login-img" th:classappend="${#locale.language == 'fa' ? 'rtl' : 'ltr'}">
+
+    <!-- BACKGROUND-IMAGE -->
+    <div class="">
+
+        <!-- GLOABAL LOADER -->
+        <div id="global-loader">
+            <img src="../assets/images/loader.svg" class="loader-img" alt="Loader">
+        </div>
+        <!-- /GLOABAL LOADER -->
+
+        <!-- PAGE -->
+        <div class="page">
+            <div class="">
+
+                <!-- CONTAINER OPEN -->
+                <div class="col col-login mx-auto mt-7">
+                    <div class="text-center">
+                        <a href="index.html"><img src="../assets/images/brand/logo-3.png" th:src="@{/assets/images/brand/logo-3.png}" class="header-brand-img" alt=""></a>
+                    </div>
+                </div>
+                <div class="container-login100">
+                    <div class="wrap-login100 p-6">
+                        <form class="login100-form validate-form" th:action="@{/login}" method="post">
+                            <span class="login100-form-title pb-5" th:text="#{login}">
+                            </span>
+                            <div th:if="${loginError}" class="alert alert-danger">
+                                <p th:text="#{loginErrorMessage}"></p>
+                            </div>
+                            <div class="panel panel-primary">
+                                <div class="panel-body tabs-menu-body p-0 pt-5">
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="tab5">
+                                            <div class="wrap-input100 validate-input input-group">
+                                                <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
+                                                    <i class="zmdi zmdi-account text-muted" aria-hidden="true"></i>
+                                                </a>
+                                                <input class="input100 border-start-0 form-control ms-0" type="text" th:placeholder="#{username}" name="username">
+                                            </div>
+                                            <div class="wrap-input100 validate-input input-group" id="Password-toggle">
+                                                <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
+                                                    <i class="zmdi zmdi-eye text-muted" aria-hidden="true"></i>
+                                                </a>
+                                                <input class="input100 border-start-0 form-control ms-0" type="password" th:placeholder="#{password}" name="password">
+                                            </div>
+                                            <a href="#" th:text="#{forgotPassword}"></a>
+                                            <div class="container-login100-form-btn">
+                                                <input type="submit" class="login100-form-btn btn-primary" th:value="#{login}" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+                <!-- CONTAINER CLOSED -->
+            </div>
+        </div>
+        <!-- End PAGE -->
+
+    </div>
+    <!-- BACKGROUND-IMAGE CLOSED -->
+
+    <div th:replace="~{admin-panel/index :: scripts}">
+    </div>
+
+
+</body>
+
+</html>
