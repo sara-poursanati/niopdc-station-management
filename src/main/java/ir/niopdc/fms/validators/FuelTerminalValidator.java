@@ -9,7 +9,7 @@ public class FuelTerminalValidator {
     public static BindingResult createUpdateValidator(FuelTerminalCreateUpdateDTO theFuelTerminal, BindingResult result) {
         // checking validations
         if (theFuelTerminal.getId().isEmpty()) {
-            result.addError(new FieldError("theFuelStation", "id", "The Id is required."));
+            result.addError(new FieldError("theFuelStation", "tableId", "The Id is required."));
         }
         if(theFuelTerminal.getFuelStationId().isEmpty()) {
             result.addError(new FieldError("theFuelTerminal", "fuelStationId", "The Fuel Station Id is required"));

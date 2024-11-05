@@ -63,64 +63,6 @@
                     </div>
                 </div>
             </div>
-            <br>
-
-            <div class="page-header">
-                <h1 class="page-title">Fuel Terminals</h1>
-            </div>
-
-            <a th:href="@{/fuelTerminals/add(fuelStationId=${fuelStation.id})}"
-               class="btn btn-primary btn-sm mb-3">
-                Add FuelTerminal
-            </a>
-            <div th:if="${!fuelStation.fuelTerminals.isEmpty()}">
-                <table class="table table-bordered text-nowrap mb-0 table-hover">
-                    <thead class="border-top">
-                    <tr>
-                        <th class="bg-transparent border-bottom-0 w-5" th:text="#{id}"></th>
-                        <th class="bg-transparent border-bottom-0" th:text="#{fuelStationId}"></th>
-                        <th class="bg-transparent border-bottom-0">Fuel Sam Id</th>
-                        <th class="bg-transparent border-bottom-0">Pay Sam Id</th>
-                        <th class="bg-transparent border-bottom-0">Fuel Type</th>
-                        <th class="bg-transparent border-bottom-0">Ipc Ip Addr</th>
-                        <th class="bg-transparent border-bottom-0">Pt Ip Addr</th>
-                        <th class="bg-transparent border-bottom-0">Nozzle ID</th>
-                        <th class="bg-transparent border-bottom-0">Oilcan ID</th>
-                        <th class="bg-transparent border-bottom-0">Dispenser Type</th>
-                        <th class="bg-transparent border-bottom-0" th:text="#{action}"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="tempFuelTerminal : ${fuelStation.fuelTerminals}"
-                        th:onclick="|redirectTo('@{/fuelTerminals/info(fuelTerminalId=${tempFuelTerminal.id})}')|">
-                        <td th:text="${tempFuelTerminal.id}"></td>
-                        <td th:text="${tempFuelTerminal.fuelStationId}"></td>
-                        <td th:text="${tempFuelTerminal.fuelSamId}"></td>
-                        <td th:text="${tempFuelTerminal.paySamId}"></td>
-                        <td th:text="${tempFuelTerminal.fuelType}"></td>
-                        <td th:text="${tempFuelTerminal.ipcIpAddr}"></td>
-                        <td th:text="${tempFuelTerminal.ptIpAddr}"></td>
-                        <td th:text="${tempFuelTerminal.nozzleId}"></td>
-                        <td th:text="${tempFuelTerminal.oilcanId}"></td>
-                        <td th:text="${tempFuelTerminal.dispenserType}"></td>
-                        <td class="center-text">
-                            <a th:href="@{/fuelTerminals/update(fuelTerminalId=${tempFuelTerminal.id})}"
-                               class="btn btn-info" th:text="#{edit}">
-
-                            </a>
-
-                            <a th:href="@{/fuelTerminals/delete(fuelTerminalId=${tempFuelTerminal.id})}"
-                               class="btn btn-danger" th:text="#{delete}"
-                               onclick="if (!(confirm('Are you sure you want to delete this fuel terminal?'))) return false"
-                            >
-
-                            </a>
-                        </td>
-                    </tr>
-
-                    </tbody>
-                </table>
-            </div>
 
         </div>
 

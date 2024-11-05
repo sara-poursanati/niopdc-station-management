@@ -51,7 +51,7 @@
                             <div class="col-md-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <a th:href="@{/fuelTerminals/add}" th:text="#{addFuelTerminal}"
+                                        <a th:href="@{/fuelTerminals/add(fuelStationId=${stationId})}" th:text="#{addFuelTerminal}"
                                            class="btn btn-primary btn-sm mb-3">
 
                                         </a>
@@ -61,7 +61,7 @@
                                             <table id="crypto-data-table" class="table table-bordered text-nowrap mb-0 table-hover">
                                                 <thead class="border-top">
                                                     <tr>
-                                                        <th class="bg-transparent border-bottom-0 w-5" th:text="#{id}"></th>
+                                                        <th class="bg-transparent border-bottom-0 w-5" th:text="#{tableId}"></th>
                                                         <th class="bg-transparent border-bottom-0" th:text="#{fuelStationId}"></th>
                                                         <th class="bg-transparent border-bottom-0">Fuel Sam Id</th>
                                                         <th class="bg-transparent border-bottom-0">Pay Sam Id</th>

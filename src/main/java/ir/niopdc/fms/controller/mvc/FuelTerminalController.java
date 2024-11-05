@@ -32,9 +32,12 @@ public class FuelTerminalController {
     }
 
     @GetMapping("/list")
-    public String showListFuelTerminal(Model theModel) {
+    public String showListFuelTerminal(@RequestParam("stationId") String stationId, Model theModel) {
         // get the fuelTerminals from DB
-        List<FuelTerminalGetDTO> theFuelTerminals = fuelTerminalService.findAllFuelTerminal();
+        List<FuelTerminalGetDTO> theFuelTerminals = fuelTerminalFacadeService.findAllFuelTerminalsByStationId(stationId);
+
+        // add stationId to the model for add button in front side
+        theModel.addAttribute("stationId", stationId);
 
         // add to the spring model
         theModel.addAttribute("fuelTerminals", theFuelTerminals);
@@ -52,12 +55,6 @@ public class FuelTerminalController {
 
         theModel.addAttribute("theFuelStationId", fuelStationId);
 
-        // add path variable to model for specify witch page should show after creating a new obj
-        if (fuelStationId != null) {
-            theModel.addAttribute("path",
-                    URI.create("fuelStations/info?fuelStationId=" + fuelStationId));
-        }
-
         return "fuelTerminals/fuelTerminal-create";
     }
 
@@ -65,7 +62,6 @@ public class FuelTerminalController {
     public String createFuelTerminal(
             @Valid @ModelAttribute("fuelTerminal") FuelTerminalCreateUpdateDTO theFuelTerminal,
             BindingResult result,
-            @Nullable @RequestParam("path") String path,
             Model theModel
             )
     {
@@ -85,13 +81,8 @@ public class FuelTerminalController {
             return "fuelTerminals/fuelTerminal-create";
         }
 
-        assert path != null;
-        if (!path.isEmpty()) {
-            return "redirect:/%s".formatted(path);
-        }
-
         // use a redirect to prevent duplicate submissions
-        return "redirect:/fuelTerminals/list";
+        return "redirect:/fuelTerminals/list?stationId=%s".formatted(theFuelTerminal.getFuelStationId());
     }
 
     @GetMapping("/delete")
@@ -134,7 +125,7 @@ public class FuelTerminalController {
         fuelTerminalService.updateFuelTerminal(theFuelTerminal);
 
         // use a redirect to prevent duplicate submissions
-        return "redirect:/fuelTerminals/list";
+        return "redirect:/fuelTerminals/list?stationId=%s".formatted(theFuelTerminal.getFuelStationId());
     }
 
     @GetMapping("/info")

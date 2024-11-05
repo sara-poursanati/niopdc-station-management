@@ -18,11 +18,6 @@ public class FuelStationService extends BaseService<FuelStationRepository, FuelS
        setRepository(theFuelStationRepository);
     }
 
-    public FuelStationGetDTO findFuelStationById(String theId) {
-        var fuelStation = getRepository().findById(theId).orElseThrow(NotFoundException::new);
-        return FuelStationMapper.mapToFuelStationGetDTO(fuelStation);
-    }
-
     public List<FuelStationGetDTO> findAllFuelStation() {
         var result =
                 FuelStationMapper.mapToFuelStationGetDTOs(getRepository().findAllByOrderByOpenDate());
@@ -71,6 +66,14 @@ public class FuelStationService extends BaseService<FuelStationRepository, FuelS
 
         var result =
                 FuelStationMapper.mapToFuelStationGetDTOs(getRepository().findBySearchText(name));
+        return result;
+    }
+
+    public FuelStationGetDTO findFuelStationById(String id) {
+        FuelStation fuelStation = getRepository().findById(id).orElseThrow(() -> new NotFoundException("No fuel station is available with this id"));
+
+        FuelStationGetDTO result = FuelStationMapper.mapToFuelStationGetDTO(fuelStation);
+
         return result;
     }
 
