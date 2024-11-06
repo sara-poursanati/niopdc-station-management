@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:replace="~{admin-panel/index :: head}">
+<head th:replace="~{fragments/template :: head}">
 
 </head>
 <body class="app sidebar-mini light-mode" th:classappend="${#locale.language == 'fa' ? 'rtl' : 'ltr'}">
@@ -15,13 +15,13 @@
     <div class="page-main">
 
         <!-- app-Header -->
-        <div class="app-header header sticky" th:replace="~{admin-panel/index :: app-header}">
+        <div class="app-header header sticky" th:replace="~{fragments/template :: app-header}">
 
         </div>
         <!-- /app-Header -->
 
         <!--APP-SIDEBAR-->
-        <div class="sticky" th:replace="~{admin-panel/index :: sidebar}">
+        <div class="sticky" th:replace="~{fragments/template :: sidebar}">
             <!--/APP-SIDEBAR-->
         </div>
 
@@ -101,7 +101,7 @@
     <!-- Country-selector modal-->
 
     <!-- FOOTER -->
-    <footer class="footer" th:replace="~{admin-panel/index :: app-footer}">
+    <footer class="footer" th:replace="~{fragments/template :: app-footer}">
 
     </footer>
 
@@ -149,7 +149,7 @@
 <!-- CUSTOM JS -->
 <script src="../assets/js/custom.js"></script>
 
-<script th:replace="~{admin-panel/index :: search-script}"></script>
+<script th:replace="~{fragments/template :: search-script}"></script>
 
 </body>
 </html>

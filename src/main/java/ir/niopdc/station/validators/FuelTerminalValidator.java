@@ -1,17 +1,17 @@
-package ir.niopdc.fms.validators;
+package ir.niopdc.station.validators;
 
-import ir.niopdc.fms.domain.dto.FuelTerminalCreateUpdateDTO;
+import ir.niopdc.domain.fuelterminal.FuelTerminal;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 
 public class FuelTerminalValidator {
 
-    public static BindingResult createUpdateValidator(FuelTerminalCreateUpdateDTO theFuelTerminal, BindingResult result) {
+    public static BindingResult createUpdateValidator(FuelTerminal theFuelTerminal, BindingResult result) {
         // checking validations
-        if (theFuelTerminal.getId().isEmpty()) {
+        if (theFuelTerminal.getId().getTerminalId().isEmpty()) {
             result.addError(new FieldError("theFuelStation", "tableId", "The Id is required."));
         }
-        if(theFuelTerminal.getFuelStationId().isEmpty()) {
+        if(theFuelTerminal.getId().getStationId().isEmpty()) {
             result.addError(new FieldError("theFuelTerminal", "fuelStationId", "The Fuel Station Id is required"));
         }
 

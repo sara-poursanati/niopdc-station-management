@@ -1,18 +1,18 @@
-package ir.niopdc.fms.controller.mvc;
+package ir.niopdc.station.controller.mvc;
 
-import ir.niopdc.fms.domain.dto.FuelTerminalCreateUpdateDTO;
-import ir.niopdc.fms.domain.dto.FuelTerminalGetDTO;
-import ir.niopdc.fms.domain.service.FuelTerminalService;
-import ir.niopdc.fms.facade.FuelTerminalFacadeService;
-import ir.niopdc.fms.validators.FuelTerminalValidator;
+import ir.niopdc.domain.fuelterminal.FuelTerminal;
+import ir.niopdc.domain.fuelterminal.FuelTerminalKey;
+import ir.niopdc.domain.fuelterminal.FuelTerminalService;
+import ir.niopdc.station.facade.FuelTerminalFacadeService;
+import ir.niopdc.station.validators.FuelTerminalValidator;
 import jakarta.annotation.Nullable;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import java.net.URI;
 import java.util.List;
 
 @Controller
@@ -34,7 +34,7 @@ public class FuelTerminalController {
     @GetMapping("/list")
     public String showListFuelTerminal(@RequestParam("stationId") String stationId, Model theModel) {
         // get the fuelTerminals from DB
-        List<FuelTerminalGetDTO> theFuelTerminals = fuelTerminalFacadeService.findAllFuelTerminalsByStationId(stationId);
+        List<FuelTerminal> theFuelTerminals = fuelTerminalFacadeService.findAllFuelTerminalsByStationId(stationId);
 
         // add stationId to the model for add button in front side
         theModel.addAttribute("stationId", stationId);
@@ -49,9 +49,14 @@ public class FuelTerminalController {
     public String showFormForAdd(@Nullable @RequestParam("fuelStationId") String fuelStationId, Model theModel) {
 
         // create model attribute to bind form data
-        FuelTerminalCreateUpdateDTO theFuelTerminal = new FuelTerminalCreateUpdateDTO();
+        FuelTerminal theFuelTerminal = new FuelTerminal();
+
+        // create model attribute for id to bind from data
+        FuelTerminalKey fuelTerminalKey = new FuelTerminalKey();
 
         theModel.addAttribute("fuelTerminal", theFuelTerminal);
+
+        theModel.addAttribute("fuelTerminalKey", fuelTerminalKey);
 
         theModel.addAttribute("theFuelStationId", fuelStationId);
 
@@ -60,11 +65,15 @@ public class FuelTerminalController {
 
     @PostMapping("/save")
     public String createFuelTerminal(
-            @Valid @ModelAttribute("fuelTerminal") FuelTerminalCreateUpdateDTO theFuelTerminal,
+            @Valid @ModelAttribute("fuelTerminal") FuelTerminal theFuelTerminal,
+            @ModelAttribute("fuelTerminalKey") FuelTerminalKey fuelTerminalKey,
             BindingResult result,
             Model theModel
             )
     {
+        // set the id
+        theFuelTerminal.setId(fuelTerminalKey);
+
         // checking validations
         var validatedResult = FuelTerminalValidator.createUpdateValidator(theFuelTerminal, result);
 
@@ -82,15 +91,15 @@ public class FuelTerminalController {
         }
 
         // use a redirect to prevent duplicate submissions
-        return "redirect:/fuelTerminals/list?stationId=%s".formatted(theFuelTerminal.getFuelStationId());
+        return "redirect:/fuelTerminals/list?stationId=%s".formatted(theFuelTerminal.getId().getStationId());
     }
 
     @GetMapping("/delete")
-    public String delete(@RequestParam("fuelTerminalId")  String theId) {
+    public String delete(@RequestParam("fuelTerminalId")  String theId, HttpServletRequest request) {
 
         fuelTerminalService.deleteFuelTerminal(theId);
 
-        return "redirect:/fuelTerminals/list";
+        return "redirect:" + request.getHeader("Referer");
     }
 
     @GetMapping("/update")
@@ -99,7 +108,7 @@ public class FuelTerminalController {
             Model theModel
     ) {
         // get the fuel station from svc
-        FuelTerminalGetDTO theFuelTerminal = fuelTerminalService.findFuelTerminalById(theId);
+        FuelTerminal theFuelTerminal = fuelTerminalService.findFuelTerminalById(theId);
 
         // set fuel terminal in model to populate the form
         theModel.addAttribute("fuelTerminal", theFuelTerminal);
@@ -110,7 +119,7 @@ public class FuelTerminalController {
 
     @PostMapping("/update")
     public String updateFuelTerminal(
-            @Valid @ModelAttribute("fuelTerminal") FuelTerminalCreateUpdateDTO theFuelTerminal,
+            @Valid @ModelAttribute("fuelTerminal") FuelTerminal theFuelTerminal,
             BindingResult result
     )
     {
@@ -125,13 +134,13 @@ public class FuelTerminalController {
         fuelTerminalService.updateFuelTerminal(theFuelTerminal);
 
         // use a redirect to prevent duplicate submissions
-        return "redirect:/fuelTerminals/list?stationId=%s".formatted(theFuelTerminal.getFuelStationId());
+        return "redirect:/fuelTerminals/list?stationId=%s".formatted(theFuelTerminal.getId().getStationId());
     }
 
     @GetMapping("/info")
     public String showInfoPage(@RequestParam("fuelTerminalId") String theId, Model theModel) {
         // get the fuel terminal from svc
-        FuelTerminalGetDTO theFuelTerminal = fuelTerminalService.findFuelTerminalById(theId);
+        FuelTerminal theFuelTerminal = fuelTerminalService.findFuelTerminalById(theId);
 
         // set fuel terminal in model to provide a ctx
         theModel.addAttribute("fuelTerminal", theFuelTerminal);

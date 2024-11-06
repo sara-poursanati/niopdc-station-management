@@ -1,4 +1,4 @@
-package ir.niopdc.fms.config;
+package ir.niopdc.station.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,7 +1,7 @@
 <!doctype html>
 <html th:lang="${#locale.language}" th:attr="dir=${#locale.language == 'fa' ? 'rtl' : 'ltr'}">
 
-<head th:replace="~{admin-panel/index :: head}">
+<head th:replace="~{fragments/template :: head}">
 
 </head>
 
@@ -18,13 +18,13 @@
     <div class="page-main">
 
         <!-- app-Header -->
-        <div class="app-header header sticky" th:replace="~{admin-panel/index :: app-header}">
+        <div class="app-header header sticky" th:replace="~{fragments/template :: app-header}">
 
         </div>
         <!-- /app-Header -->
 
         <!--APP-SIDEBAR-->
-        <div class="sticky" th:replace="~{admin-panel/index :: sidebar}">
+        <div class="sticky" th:replace="~{fragments/template :: sidebar}">
             <!--/APP-SIDEBAR-->
         </div>
 
@@ -146,7 +146,7 @@
     <!-- Country-selector modal-->
 
     <!-- FOOTER -->
-    <footer class="footer" th:replace="~{admin-panel/index :: app-footer}">
+    <footer class="footer" th:replace="~{fragments/template :: app-footer}">
 
     </footer>
     <!-- FOOTER CLOSED -->
@@ -201,7 +201,7 @@
     }
 </script>
 
-<script th:replace="~{admin-panel/index :: search-script}"></script>
+<script th:replace="~{fragments/template :: search-script}"></script>
 
 
 </body>

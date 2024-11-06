@@ -1,16 +1,14 @@
-package ir.niopdc.fms.controller.mvc;
+package ir.niopdc.station.controller.mvc;
 
-import ir.niopdc.fms.domain.dto.FuelStationCreateUpdateDTO;
-import ir.niopdc.fms.domain.dto.FuelStationGetDTO;
-import ir.niopdc.fms.domain.service.FuelStationService;
-import ir.niopdc.fms.validators.FuelStationValidator;
+import ir.niopdc.domain.fuelstation.FuelStation;
+import ir.niopdc.domain.fuelstation.FuelStationService;
+import ir.niopdc.station.validators.FuelStationValidator;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @Controller
@@ -26,7 +24,7 @@ public class FuelStationController {
     @GetMapping("/list")
     public String showListFuelStation(Model theModel) {
         // get the fuelStations from DB
-        List<FuelStationGetDTO> theFuelStations = fuelStationService.findAllFuelStation();
+        List<FuelStation> theFuelStations = fuelStationService.findAll();
 
         // add to the spring model
         theModel.addAttribute("fuelStations", theFuelStations);
@@ -38,7 +36,7 @@ public class FuelStationController {
     public String showFormForAdd(Model theModel) {
 
         // create model attribute to bind form data
-        FuelStationCreateUpdateDTO theFuelStation = new FuelStationCreateUpdateDTO();
+        FuelStation theFuelStation = new FuelStation();
 
         theModel.addAttribute("fuelStation", theFuelStation);
 
@@ -55,7 +53,7 @@ public class FuelStationController {
 
     @PostMapping("/save")
     public String createFuelStation(
-            @Valid @ModelAttribute("fuelStation") FuelStationCreateUpdateDTO theFuelStation,
+            @Valid @ModelAttribute("fuelStation") FuelStation theFuelStation,
             BindingResult result
     ) throws MethodArgumentNotValidException {
 
@@ -75,7 +73,7 @@ public class FuelStationController {
 
     @PostMapping("/update")
     public String updateFuelStation(
-            @Valid @ModelAttribute("fuelStation") FuelStationCreateUpdateDTO theFuelStation,
+            @Valid @ModelAttribute("fuelStation") FuelStation theFuelStation,
             BindingResult result
             )
     {
@@ -96,7 +94,7 @@ public class FuelStationController {
     @GetMapping("/update")
     public String showFormForUpdate(@RequestParam("fuelStationId") String theId, Model theModel) {
         // get the fuel station from svc
-        FuelStationGetDTO theFuelStation = fuelStationService.findFuelStationById(theId);
+        FuelStation theFuelStation = fuelStationService.findFuelStationById(theId);
 
         // set fuel station in model to populate the form
         theModel.addAttribute("fuelStation", theFuelStation);
@@ -109,7 +107,7 @@ public class FuelStationController {
     @GetMapping("/info")
     public String showInfoPage(@RequestParam("fuelStationId") String theId, Model theModel) {
         // get the fuel station from svc
-        FuelStationGetDTO theFuelStation = fuelStationService.findFuelStationById(theId);
+        FuelStation theFuelStation = fuelStationService.findFuelStationById(theId);
 
         // set fuel station in model to provide a ctx
         theModel.addAttribute("fuelStation", theFuelStation);

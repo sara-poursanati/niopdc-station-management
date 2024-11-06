@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en" dir="ltr">
 
-<head th:replace="~{admin-panel/index :: head}">
+<head th:replace="~{fragments/template :: head}">
 </head>
 
 <body class="app sidebar-mini login-img" th:classappend="${#locale.language == 'fa' ? 'rtl' : 'ltr'}">
@@ -69,7 +69,7 @@
     </div>
     <!-- BACKGROUND-IMAGE CLOSED -->
 
-    <div th:replace="~{admin-panel/index :: scripts}">
+    <div th:replace="~{fragments/template :: scripts}">
     </div>
 
 

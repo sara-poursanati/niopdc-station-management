@@ -9,12 +9,13 @@ public class LoginController {
 
     @RequestMapping("/login")
     public String showLoginForm(Model model){
-        return "login";
+        return "admin-panel/login";
     }
 
     @RequestMapping("/login-error")
     public String showLoginFormError(Model model){
         model.addAttribute("loginError", true);
-        return "login";
+        return "admin-panel/login";
     }
+
 }

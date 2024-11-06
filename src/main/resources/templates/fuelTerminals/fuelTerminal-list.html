@@ -1,7 +1,7 @@
 <!doctype html>
 <html th:lang="${#locale.language}" th:attr="dir=${#locale.language == 'fa' ? 'rtl' : 'ltr'}">
 
-<head th:replace="~{admin-panel/index :: head}">
+<head th:replace="~{fragments/template :: head}">
 
 </head>
 
@@ -18,13 +18,13 @@
         <div class="page-main">
 
             <!-- app-Header -->
-            <div class="app-header header sticky" th:replace="~{admin-panel/index :: app-header}">
+            <div class="app-header header sticky" th:replace="~{fragments/template :: app-header}">
 
             </div>
             <!-- /app-Header -->
 
             <!--APP-SIDEBAR-->
-            <div class="sticky" th:replace="~{admin-panel/index :: sidebar}">
+            <div class="sticky" th:replace="~{fragments/template :: sidebar}">
                 <!--/APP-SIDEBAR-->
             </div>
             <!--app-content open-->
@@ -78,12 +78,12 @@
                                                 <tr th:if="${fuelTerminals == null}" th:text="#{noDataAvailableInTable}"></tr>
 <!--                                                <tr th:unless="${teacher.gender == 'F'}">Male</tr>-->
                                                 <tr th:each="tempFuelTerminal : ${fuelTerminals}"
-                                                    th:onclick="|redirectTo('@{/fuelTerminals/info(fuelTerminalId=${tempFuelTerminal.id})}')|">
-                                                    <td th:text="${tempFuelTerminal.id}"></td>
-                                                    <td th:text="${tempFuelTerminal.fuelStationId}"></td>
+                                                    th:onclick="|redirectTo('@{/fuelTerminals/info(fuelTerminalId=${tempFuelTerminal.id.terminalId})}')|">
+                                                    <td th:text="${tempFuelTerminal.id.terminalId}"></td>
+                                                    <td th:text="${tempFuelTerminal.id.stationId}"></td>
                                                     <td th:text="${tempFuelTerminal.fuelSamId}"></td>
                                                     <td th:text="${tempFuelTerminal.paySamId}"></td>
-                                                    <td th:text="${tempFuelTerminal.fuelType}"></td>
+                                                    <td th:text="${tempFuelTerminal.fuelId}"></td>
                                                     <td th:text="${tempFuelTerminal.ipcIpAddr}"></td>
                                                     <td th:text="${tempFuelTerminal.ptIpAddr}"></td>
                                                     <td th:text="${tempFuelTerminal.nozzleId}"></td>
@@ -91,11 +91,11 @@
                                                     <td th:text="${tempFuelTerminal.dispenserType}"></td>
                                                     <td>
                                                         <div class="g-2">
-                                                            <a class="btn text-primary btn-sm" th:href="@{/fuelTerminals/update(fuelTerminalId=${tempFuelTerminal.id})}"
+                                                            <a class="btn text-primary btn-sm" th:href="@{/fuelTerminals/update(fuelTerminalId=${tempFuelTerminal.id.terminalId})}"
                                                                data-bs-toggle="tooltip"
                                                                th:data-bs-original-title="#{edit}"><span
                                                                     class="fe fe-edit fs-14"></span></a>
-                                                            <a class="btn text-danger btn-sm" th:href="@{/fuelTerminals/delete(fuelTerminalId=${tempFuelTerminal.id})}"
+                                                            <a class="btn text-danger btn-sm" th:href="@{/fuelTerminals/delete(fuelTerminalId=${tempFuelTerminal.id.terminalId})}"
                                                                data-bs-toggle="tooltip"
                                                                th:data-bs-original-title="#{delete}"><span
                                                                     class="fe fe-trash-2 fs-14"></span></a>
@@ -131,14 +131,14 @@
                         <ul class="row p-3">
                             <li class="col-lg-6 mb-2">
                                 <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block"
-                                   th:href="@{/fuelTerminals/list(lang=#{lang.change.en})}">
+                                   th:href="@{/fuelTerminals/list(stationId=${stationId}, lang=#{lang.change.en})}">
                                     <span class="country-selector"><img alt="" src="../assets/images/flags/us_flag.jpg" th:text="#{english}"
                                                                         class="me-3 language"></span>
                                 </a>
                             </li>
                             <li class="col-lg-6 mb-2">
                                 <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block"
-                                   th:href="@{/fuelTerminals/list(lang=#{lang.change.fa})}">
+                                   th:href="@{/fuelTerminals/list(stationId=${stationId}, lang=#{lang.change.fa})}">
                                     <span class="country-selector"><img alt=""
                                                                         src="../assets/images/flags/ir.svg" th:text="#{persian}"
                                                                         class="me-3 language"></span>
@@ -152,7 +152,7 @@
         <!-- Country-selector modal-->
 
         <!-- FOOTER -->
-        <footer class="footer" th:replace="~{admin-panel/index :: app-footer}">
+        <footer class="footer" th:replace="~{fragments/template :: app-footer}">
 
         </footer>
 
@@ -208,7 +208,7 @@
         }
     </script>
 
-    <script th:replace="~{admin-panel/index :: search-script}"></script>
+    <script th:replace="~{fragments/template :: search-script}"></script>
 
 </body>
 
