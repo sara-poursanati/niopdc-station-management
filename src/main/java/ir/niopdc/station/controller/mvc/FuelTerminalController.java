@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.sql.SQLException;
 import java.util.List;
 
 @Controller
@@ -121,8 +123,7 @@ public class FuelTerminalController {
     public String updateFuelTerminal(
             @Valid @ModelAttribute("fuelTerminal") FuelTerminal theFuelTerminal,
             BindingResult result
-    )
-    {
+    ) throws SQLException {
         // checking validations
         var validatedResult = FuelTerminalValidator.createUpdateValidator(theFuelTerminal, result);
 

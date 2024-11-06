@@ -6,13 +6,15 @@ import org.springframework.validation.FieldError;
 
 public class FuelStationValidator {
 
+    private FuelStationValidator(){}
+
     public static BindingResult createUpdateValidator(FuelStation theFuelStation, BindingResult result) {
         // checking validations
         if (theFuelStation.getId().isEmpty()) {
-            result.addError(new FieldError("theFuelStation", "tableId", "The Id is required."));
+            result.addError(new FieldError("theFuelStation", "id", "The Id is required."));
         }
         if(theFuelStation.getName().isEmpty()) {
-            result.addError(new FieldError("theFuelStation", "tableName", "The Name is required"));
+            result.addError(new FieldError("theFuelStation", "name", "The Name is required"));
         }
         if(theFuelStation.getInitCount() < 0 || theFuelStation.getInitCount() > 5) {
             result.addError(new FieldError(

@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
+
+import java.sql.SQLException;
 import java.util.List;
 
 @Controller
@@ -55,7 +57,7 @@ public class FuelStationController {
     public String createFuelStation(
             @Valid @ModelAttribute("fuelStation") FuelStation theFuelStation,
             BindingResult result
-    ) throws MethodArgumentNotValidException {
+    ) throws SQLException {
 
         // check validation
         var validatedResult = FuelStationValidator.createUpdateValidator(theFuelStation, result);

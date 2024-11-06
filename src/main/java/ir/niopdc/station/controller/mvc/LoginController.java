@@ -18,4 +18,10 @@ public class LoginController {
         return "admin-panel/login";
     }
 
+    @RequestMapping("/logout")
+    public String showLoginFormAfterLogout(Model model){
+        return "redirect:/login";
+    }
+
+
 }
