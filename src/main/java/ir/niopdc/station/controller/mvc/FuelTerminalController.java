@@ -22,6 +22,10 @@ import java.util.List;
 @Validated
 public class FuelTerminalController {
 
+    public static final String TERMINAL_KEY = "fuelTerminal";
+
+    public static final String TERMINAL_CREATE_PAGE = "fuelTerminals/fuelTerminal-create";
+
     private FuelTerminalService fuelTerminalService;
 
     private FuelTerminalFacadeService fuelTerminalFacadeService;
@@ -56,18 +60,18 @@ public class FuelTerminalController {
         // create model attribute for id to bind from data
         FuelTerminalKey fuelTerminalKey = new FuelTerminalKey();
 
-        theModel.addAttribute("fuelTerminal", theFuelTerminal);
+        theModel.addAttribute(TERMINAL_KEY, theFuelTerminal);
 
         theModel.addAttribute("fuelTerminalKey", fuelTerminalKey);
 
         theModel.addAttribute("theFuelStationId", fuelStationId);
 
-        return "fuelTerminals/fuelTerminal-create";
+        return TERMINAL_CREATE_PAGE;
     }
 
     @PostMapping("/save")
     public String createFuelTerminal(
-            @Valid @ModelAttribute("fuelTerminal") FuelTerminal theFuelTerminal,
+            @Valid @ModelAttribute(TERMINAL_KEY) FuelTerminal theFuelTerminal,
             @ModelAttribute("fuelTerminalKey") FuelTerminalKey fuelTerminalKey,
             BindingResult result,
             Model theModel
@@ -80,7 +84,7 @@ public class FuelTerminalController {
         var validatedResult = FuelTerminalValidator.createUpdateValidator(theFuelTerminal, result);
 
         if (validatedResult.hasErrors()) {
-            return "fuelTerminals/fuelTerminal-create";
+            return TERMINAL_CREATE_PAGE;
         }
 
         try {
@@ -89,7 +93,7 @@ public class FuelTerminalController {
         } catch (Exception e) {
             // send the error message to the front for showing in UI
             theModel.addAttribute("error", e.getMessage());
-            return "fuelTerminals/fuelTerminal-create";
+            return TERMINAL_CREATE_PAGE;
         }
 
         // use a redirect to prevent duplicate submissions
@@ -113,7 +117,7 @@ public class FuelTerminalController {
         FuelTerminal theFuelTerminal = fuelTerminalService.findFuelTerminalById(theId);
 
         // set fuel terminal in model to populate the form
-        theModel.addAttribute("fuelTerminal", theFuelTerminal);
+        theModel.addAttribute(TERMINAL_KEY, theFuelTerminal);
 
         // send over to our form
         return "fuelTerminals/fuelTerminal-update";
@@ -121,7 +125,7 @@ public class FuelTerminalController {
 
     @PostMapping("/update")
     public String updateFuelTerminal(
-            @Valid @ModelAttribute("fuelTerminal") FuelTerminal theFuelTerminal,
+            @Valid @ModelAttribute(TERMINAL_KEY) FuelTerminal theFuelTerminal,
             BindingResult result
     ) throws SQLException {
         // checking validations
@@ -144,7 +148,7 @@ public class FuelTerminalController {
         FuelTerminal theFuelTerminal = fuelTerminalService.findFuelTerminalById(theId);
 
         // set fuel terminal in model to provide a ctx
-        theModel.addAttribute("fuelTerminal", theFuelTerminal);
+        theModel.addAttribute(TERMINAL_KEY, theFuelTerminal);
 
         // send over to our form
         return "fuelTerminals/fuelTerminal-info";

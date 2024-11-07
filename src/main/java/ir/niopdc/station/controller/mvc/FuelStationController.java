@@ -7,7 +7,6 @@ import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
@@ -16,6 +15,10 @@ import java.util.List;
 @Controller
 @RequestMapping("/fuelStations")
 public class FuelStationController {
+
+    private static final String STATION_KEY = "fuelStation";
+
+    private static final String REDIRECT_STATION_LIST = "redirect:/fuelStations/list";
 
     private FuelStationService fuelStationService;
 
@@ -40,7 +43,7 @@ public class FuelStationController {
         // create model attribute to bind form data
         FuelStation theFuelStation = new FuelStation();
 
-        theModel.addAttribute("fuelStation", theFuelStation);
+        theModel.addAttribute(STATION_KEY, theFuelStation);
 
         return "fuelStations/fuelStation-create";
     }
@@ -50,12 +53,12 @@ public class FuelStationController {
 
         fuelStationService.deleteById(theId);
 
-        return "redirect:/fuelStations/list";
+        return REDIRECT_STATION_LIST;
     }
 
     @PostMapping("/save")
     public String createFuelStation(
-            @Valid @ModelAttribute("fuelStation") FuelStation theFuelStation,
+            @Valid @ModelAttribute(STATION_KEY) FuelStation theFuelStation,
             BindingResult result
     ) throws SQLException {
 
@@ -70,12 +73,12 @@ public class FuelStationController {
         fuelStationService.createFuelStation(theFuelStation);
 
         // use a redirect to prevent duplicate submissions
-        return "redirect:/fuelStations/list";
+        return REDIRECT_STATION_LIST;
     }
 
     @PostMapping("/update")
     public String updateFuelStation(
-            @Valid @ModelAttribute("fuelStation") FuelStation theFuelStation,
+            @Valid @ModelAttribute(STATION_KEY) FuelStation theFuelStation,
             BindingResult result
             )
     {
@@ -90,7 +93,7 @@ public class FuelStationController {
         fuelStationService.updateFuelStation(theFuelStation.getId(), theFuelStation);
 
         // use a redirect to prevent duplicate submissions
-        return "redirect:/fuelStations/list";
+        return REDIRECT_STATION_LIST;
     }
 
     @GetMapping("/update")
@@ -99,7 +102,7 @@ public class FuelStationController {
         FuelStation theFuelStation = fuelStationService.findFuelStationById(theId);
 
         // set fuel station in model to populate the form
-        theModel.addAttribute("fuelStation", theFuelStation);
+        theModel.addAttribute(STATION_KEY, theFuelStation);
 
         // send over to our form
         return "fuelStations/fuelStation-update";
@@ -112,7 +115,7 @@ public class FuelStationController {
         FuelStation theFuelStation = fuelStationService.findFuelStationById(theId);
 
         // set fuel station in model to provide a ctx
-        theModel.addAttribute("fuelStation", theFuelStation);
+        theModel.addAttribute(STATION_KEY, theFuelStation);
 
         // send over to our form
         return "fuelStations/fuelStation-info";

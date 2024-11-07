@@ -11,6 +11,8 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
+    public static final String LOGIN_PATH = "/login";
+
     @Bean
     UserDetailsService userDetailsService() {
         var user = User.withUsername("admin")
@@ -24,9 +26,9 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http)
             throws Exception {
         http.authorizeHttpRequests(c -> c.requestMatchers("/static/assets/**", "/assets/**").permitAll());
-        http.authorizeHttpRequests(c -> c.requestMatchers("/login", "/logout").permitAll().anyRequest().authenticated());
-        http.formLogin(form -> form.loginPage("/login").successForwardUrl("/").failureUrl("/login-error").permitAll());
-        http.logout(c -> c.logoutUrl("/logout").logoutSuccessUrl("/login"));
+        http.authorizeHttpRequests(c -> c.requestMatchers(LOGIN_PATH, "/logout").permitAll().anyRequest().authenticated());
+        http.formLogin(form -> form.loginPage(LOGIN_PATH).successForwardUrl("/").failureUrl("/login-error").permitAll());
+        http.logout(c -> c.logoutUrl("/logout").logoutSuccessUrl(LOGIN_PATH));
         return http.build();
     }
 }
