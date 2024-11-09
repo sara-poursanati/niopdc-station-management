@@ -31,4 +31,9 @@ public class MediaGatewayController {
         mediaGatewayService.deleteById(serialNumber);
     }
 
+
+
+
+
+
 }
