@@ -2,8 +2,10 @@ package ir.niopdc.station.controller;
 
 import ir.niopdc.domain.mediagateway.MediaGateway;
 import ir.niopdc.domain.mediagateway.MediaGatewayService;
+import ir.niopdc.station.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,25 +17,27 @@ public class MediaGatewayController {
 
     private final MediaGatewayService mediaGatewayService;
 
-
     @GetMapping("/")
-    public List<MediaGateway> getAll() {
-        return mediaGatewayService.findAll();
+    public String getAll(Model model) {
+        List<MediaGateway> mediaGateways = mediaGatewayService.findAll();
+        model.addAttribute("mediaGateways", mediaGateways);
+        return "media-gateway/list";
     }
 
-    @PostMapping("/creat")
-    public MediaGateway createMediaGateway(@RequestBody MediaGateway mediaGateway) {
-        return mediaGatewayService.save(mediaGateway);
+    @PostMapping("/create")
+    public String createMediaGateway(@RequestBody MediaGateway mediaGateway) {
+        mediaGatewayService.save(mediaGateway);
+        return "media-gateway/create-media-gateway";
     }
 
     @DeleteMapping("/delete")
-    public void deleteMediaGateway(@RequestParam String serialNumber) {
-        mediaGatewayService.deleteById(serialNumber);
+    public String deleteMediaGateway(@RequestParam String serialNumber) {
+        if (mediaGatewayService.existsById(serialNumber)) {
+            mediaGatewayService.deleteById(serialNumber);
+        } else {
+           throw new NotFoundException("MediaGateway Not Found");
+        }
+        return "redirect:/";
     }
-
-
-
-
-
 
 }
