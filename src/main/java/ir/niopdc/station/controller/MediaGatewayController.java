@@ -17,27 +17,34 @@ public class MediaGatewayController {
 
     private final MediaGatewayService mediaGatewayService;
 
-    @GetMapping("/")
-    public String getAll(Model model) {
+    @GetMapping("/list")
+    public String getAllMediaGateways(Model model) {
         List<MediaGateway> mediaGateways = mediaGatewayService.findAll();
         model.addAttribute("mediaGateways", mediaGateways);
         return "media-gateway/list";
     }
 
-    @PostMapping("/create")
-    public String createMediaGateway(@RequestBody MediaGateway mediaGateway) {
-        mediaGatewayService.save(mediaGateway);
+    @GetMapping("/create")
+    public String showCreateForm(Model model) {
+        model.addAttribute("mediaGateway", new MediaGateway());
         return "media-gateway/create-media-gateway";
     }
 
-    @DeleteMapping("/delete")
+    @PostMapping("/create")
+    public String createMediaGateway(@ModelAttribute("mediaGateway") MediaGateway mediaGateway, Model model) {
+        mediaGatewayService.save(mediaGateway);
+        model.addAttribute("message", "saved successfully!");
+        return "redirect:/media-gateway/list";
+    }
+
+    @GetMapping("/delete")
     public String deleteMediaGateway(@RequestParam String serialNumber) {
         if (mediaGatewayService.existsById(serialNumber)) {
             mediaGatewayService.deleteById(serialNumber);
         } else {
-           throw new NotFoundException("MediaGateway Not Found");
+            throw new NotFoundException("MediaGateway Not Found!");
         }
-        return "redirect:/";
+        return "redirect:/media-gateway/list";
     }
 
 }
