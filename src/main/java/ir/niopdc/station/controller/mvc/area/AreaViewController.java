@@ -3,7 +3,6 @@ package ir.niopdc.station.controller.mvc.area;
 
 import ir.niopdc.domain.area.AreaService;
 import ir.niopdc.domain.area.dto.AreaDto;
-import ir.niopdc.station.controller.mvc.GenericController;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,13 +16,12 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/page/areas")
-public class AreaViewController extends GenericController<AreaDto, String> {
+public class AreaViewController {
 
     private final AreaService areaServiceImpl;
 
-    @Override
     @GetMapping("/get-all-areas")
-    public String getAllEntities(Model model) {
+    public String getAllAreas(Model model) {
         List<AreaDto> areas = areaServiceImpl.getAllAreas();
         model.addAttribute("areas", areas);
         return "area-list";
@@ -33,6 +31,16 @@ public class AreaViewController extends GenericController<AreaDto, String> {
     public String createAreaForm(Model model) {
         model.addAttribute("areaDto", new AreaDto());
         return "create-area";
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<String> createArea(@ModelAttribute AreaDto areaDto) {
+        try {
+            areaServiceImpl.saveArea(areaDto);
+            return ResponseEntity.ok("منطقه با موفقیت اضافه شد!");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("خطا در اضافه کردن منطقه!");
+        }
     }
 
     @GetMapping("/main")
@@ -54,8 +62,6 @@ public class AreaViewController extends GenericController<AreaDto, String> {
         return "edit-area";
     }
 
-    // Remove this method to rely on the generic controller's `update`
-    /*
     @PostMapping("/edit")
     public ResponseEntity<Model> updateArea(@ModelAttribute AreaDto areaDto, Model model) {
         try {
@@ -68,9 +74,8 @@ public class AreaViewController extends GenericController<AreaDto, String> {
             return ResponseEntity.status(HttpStatus.OK).body(model);
         }
     }
-    */
 
-    @DeleteMapping("/delete-area")
+    @DeleteMapping("/delete")
     public ResponseEntity<String> deleteArea(@RequestParam(name = "code") String code) {
         try {
             areaServiceImpl.deleteArea(code);
@@ -78,46 +83,5 @@ public class AreaViewController extends GenericController<AreaDto, String> {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("خطا در حذف منطقه!");
         }
-    }
-
-    @Override
-    @PostMapping("/edit")
-    public ResponseEntity<String> updateEntity(@ModelAttribute AreaDto areaDto, @RequestParam("id") String code) {
-        try {
-            areaServiceImpl.updateArea(code, areaDto);
-            return ResponseEntity.ok("منطقه با موفقیت ویرایش شد!");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("خطایی رخ داده است!");
-        }
-    }
-
-    @Override
-    protected List<AreaDto> getAll() {
-        return areaServiceImpl.getAllAreas();
-    }
-
-    @Override
-    protected AreaDto getById(String code) {
-        return areaServiceImpl.getAreaByCode(code);
-    }
-
-    @Override
-    protected AreaDto save(AreaDto areaDto) {
-        return areaServiceImpl.saveArea(areaDto);
-    }
-
-    @Override
-    protected AreaDto update(String code, AreaDto areaDto) {
-        return areaServiceImpl.updateArea(code, areaDto);
-    }
-
-    @Override
-    protected void delete(String code) {
-        areaServiceImpl.deleteArea(code);
-    }
-
-    @Override
-    protected AreaDto createEmptyDto() {
-        return new AreaDto();
     }
 }

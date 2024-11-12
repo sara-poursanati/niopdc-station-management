@@ -1,66 +1,91 @@
-<!DOCTYPE html>
-<html lang="fa" xmlns:th="http://www.thymeleaf.org">
-<head>
+<!doctype html>
+<html lang="fa" dir="rtl" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/template :: head}">
     <meta charset="UTF-8">
     <title>فهرست نواحی</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-<body>
-<div class="header">
-    <h1>فهرست نواحی</h1>
-    <a href="/page/areas/get-all-areas" class="button">بازگشت</a>
-</div>
-<div class="container">
 
-    <table>
-        <thead>
-        <tr>
-            <th>نام ناحیه</th>
-            <th>کد ناحیه</th>
-            <th>کد منطقه</th>
-            <th>عملیات</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="zone : ${zones}">
-            <td th:text="${zone.name}"></td>
-            <td th:text="${zone.code}"></td>
-            <td th:text="${zone.area.code}"></td>
-            <td>
-                <a th:href="@{/page/zones/edit-zone(code=${zone.code})}" class="button edit-button">ویرایش</a>
+<body class="app sidebar-mini rtl light-mode">
 
-                <a href="#"
-                   class="button delete-button"
-                   th:attr="data-code=${zone.code}"
-                   style="background-color: red; color: white;"
-                   onclick="confirmDeleteZone(event, this)"
-                >حذف</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+<div id="global-loader" th:replace="~{fragments/template :: global-loader}"></div>
+
+<div class="page">
+    <div class="page-main">
+
+        <div class="app-header header sticky" th:replace="~{fragments/template :: app-header}">
+        </div>
+        <div class="sticky" th:replace="~{fragments/template :: app-sidebar}">
+        </div>
+
+        <div class="main-content app-content mt-0">
+            <div class="side-app">
+                <div class="main-container container-fluid">
+
+                    <div class="header mb-4" style="background-color: transparent; padding: 1rem 0;">
+                        <h1>فهرست نواحی</h1>
+                        <a href="/page/areas/get-all-areas" class="btn btn-info btn-sm">بازگشت</a>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>نام ناحیه</th>
+                                <th>کد ناحیه</th>
+                                <th>کد منطقه</th>
+                                <th>عملیات</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="zone : ${zones}">
+                                <td th:text="${zone.name}"></td>
+                                <td th:text="${zone.code}"></td>
+                                <td th:text="${zone.area.code}"></td>
+                                <td>
+                                    <a th:href="@{/page/zones/edit-zone(code=${zone.code})}" class="btn btn-warning btn-sm">ویرایش</a>
+                                    <a href="#" class="btn btn-danger btn-sm"
+                                       th:attr="data-code=${zone.id}"
+                                       onclick="confirmDeleteZone(event, this)">حذف</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer" th:replace="~{fragments/template :: app-footer}"></footer>
+
 </div>
+<a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
+
+<div th:replace="~{fragments/template :: scripts}"></div>
 
 <script>
     function confirmDeleteZone(event, element) {
         event.preventDefault();
-        const zoneCode = element.getAttribute('data-code');
+        const zoneId = element.getAttribute('data-code');
 
         if (confirm("آیا مطمئن هستید که میخواهید این ناحیه را حذف کنید؟")) {
             $.ajax({
                 type: 'DELETE',
-                url: '/page/zones/delete-zone?zoneCode=' + zoneCode,
+                url: '/page/zones/delete?zoneId=' + zoneId,
                 success: function (response) {
                     alert(response);
                     location.reload();
                 },
                 error: function (xhr) {
-                    console.log(xhr)
+                    console.log(xhr);
                     alert("خطا در حذف ناحیه!");
                 }
             });
+
         }
     }
+
 </script>
 </body>
 </html>
