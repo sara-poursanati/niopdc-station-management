@@ -55,7 +55,7 @@
                             <tr th:each="mediaGateway : ${mediaGateways}">
                                 <td th:text="${mediaGateway.serialNumber}"></td>
                                 <td>
-                                    <form th:action="@{/media-gateway/delete}" method="post"
+                                    <form th:action="@{/media-gateway/delete}" method="delete"
                                           th:onsubmit="return confirm('آیا مطمئن هستید؟')">
                                         <input type="hidden" name="serialNumber" th:value="${mediaGateway.serialNumber}">
                                         <button type="submit" class="btn btn-danger btn-sm">حذف</button>
