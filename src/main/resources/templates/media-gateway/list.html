@@ -55,11 +55,17 @@
                             <tr th:each="mediaGateway : ${mediaGateways}">
                                 <td th:text="${mediaGateway.serialNumber}"></td>
                                 <td>
-                                    <form th:action="@{/media-gateway/delete}" method="delete"
-                                          th:onsubmit="return confirm('آیا مطمئن هستید؟')">
-                                        <input type="hidden" name="serialNumber" th:value="${mediaGateway.serialNumber}">
-                                        <button type="submit" class="btn btn-danger btn-sm">حذف</button>
-                                    </form>
+                                    <div style="display: flex; gap: 5px;">
+                                        <form th:action="@{/media-gateway/delete}" method="delete"
+                                              th:onsubmit="return confirm('آیا مطمئن هستید؟')">
+                                            <input type="hidden" name="serialNumber" th:value="${mediaGateway.serialNumber}">
+                                            <button type="submit" class="btn btn-danger btn-sm">حذف</button>
+                                        </form>
+                                        <a th:href="@{'/media-gateway/add-fuel-station/' + ${mediaGateway.serialNumber}}"
+                                           class="btn btn-primary btn-sm">
+                                            افزودن جایگاه
+                                        </a>
+                                    </div>
                                 </td>
                             </tr>
                             </tbody>
