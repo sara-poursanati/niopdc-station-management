@@ -7,7 +7,6 @@
 <body>
 <div class="header">
     <h1 class="header-title">مدیریت مناطق و نواحی</h1>
-    <img src="/static/assets/images/zone-logo/logo.png" alt="Logo" class="logo">
 </div>
 
 <div class="content">
@@ -16,11 +15,11 @@
         <a href="/create" class="button">اضافه کردن منطقه</a>
     </div>
     <ul>
-        <li th:each="area : ${areas}">
-            <span th:text="${area.name}">نام منطقه</span>
+        <li th:each="zone : ${zones}">
+            <span th:text="${zone.name}">نام منطقه</span>
             <div>
-                <a th:href="@{/edit/{id}(id=${area.id})}" class="button">ویرایش</a>
-                <form th:action="@{/delete/{id}(id=${area.id})}" method="post" style="display:inline;">
+                <a th:href="@{/edit/{id}(id=${zone.id})}" class="button">ویرایش</a>
+                <form th:action="@{/delete/{id}(id=${zone.id})}" method="post" style="display:inline;">
                     <input type="hidden" name="_method" value="delete"/>
                     <button type="submit" class="button">حذف</button>
                 </form>

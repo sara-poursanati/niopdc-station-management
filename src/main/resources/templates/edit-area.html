@@ -3,7 +3,7 @@
 
 <head th:replace="~{fragments/template :: head}">
     <meta charset="UTF-8">
-    <title>ویرایش منطقه</title>
+    <title>ویرایش ناحیه</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
@@ -25,12 +25,14 @@
                 <div class="main-container container-fluid">
 
                     <div class="header mb-4" style="background-color: transparent; padding: 1rem 0;">
-                        <h1>ویرایش منطقه</h1>
-                        <a href="/page/areas/get-all-areas" class="btn btn-info btn-sm">بازگشت</a>
+                        <h1>ویرایش ناحیه</h1>
+                        <a href="/page/zones/get-all-zones" class="btn btn-info btn-sm">بازگشت</a>
                     </div>
 
                     <div class="area-list-container">
-                        <form id="editAreaForm" th:action="@{/page/areas/edit}" th:object="${areaDto}" method="post">
+                        <form id="editAreaForm" th:action="@{/page/areas/edit}" th:object="${area}" method="post">
+                            <input type="hidden" id="zoneCode" name="zoneCode" th:value="${zoneCode}"/>
+
                             <div class="row justify-content-center">
                                 <div class="col-md-4">
 
@@ -44,21 +46,21 @@
                                         <input type="text" id="code" th:field="*{code}" required readonly
                                                class="form-control"/>
                                     </div>
+
                                     <button type="button" id="saveChangesButton" class="btn btn-success">ذخیره تغییرات
                                     </button>
 
                                 </div>
                             </div>
                         </form>
+
                         <div id="responseMessage" class="mt-3"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
     <footer class="footer" th:replace="~{fragments/template :: app-footer}"></footer>
-
 </div>
 
 <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
@@ -73,10 +75,15 @@
                 url: $('#editAreaForm').attr('action'),
                 data: $('#editAreaForm').serialize(),
                 success: function (response) {
-                    $('#responseMessage').html('<div class="alert alert-success">' + response.message + '</div>');
+                    if (response.message) {
+                        $('#responseMessage').html('<div class="alert alert-success">' + response.message + '</div>');
+                    } else {
+                        $('#responseMessage').html('<div class="alert alert-danger">Unknown error occurred!</div>');
+                    }
                 },
                 error: function (xhr) {
-                    $('#responseMessage').html('<div class="alert alert-danger">' + xhr.responseText + '</div>');
+                    var errorMessage = xhr.responseText || xhr.statusText;
+                    $('#responseMessage').html('<div class="alert alert-danger">' + errorMessage + '</div>');
                 }
             });
         });

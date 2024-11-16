@@ -1,23 +1,17 @@
 package ir.niopdc.station.controller.mvc.zone;
 
 
-import ir.niopdc.domain.area.Area;
-import ir.niopdc.domain.area.AreaService;
-import ir.niopdc.domain.area.dto.AreaDto;
+import ir.niopdc.domain.zone.Zone;
 import ir.niopdc.domain.zone.ZoneService;
-import ir.niopdc.domain.zone.dto.ZoneDto;
-import jakarta.validation.Valid;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -25,71 +19,69 @@ import java.util.Map;
 public class ZoneViewController {
 
     private final ZoneService zoneService;
-    private final AreaService areaService;
+
+    @GetMapping("/get-all-zones")
+    public String getAllZones(Model model) {
+        List<Zone> zones = zoneService.getAllZones();
+        model.addAttribute("zones", zones);
+        return "zone-list";
+    }
 
     @GetMapping("/create-zone")
-    public String showCreateZoneForm(@RequestParam("areaCode") String areaCode, Model model) {
-        ZoneDto zoneDto = new ZoneDto();
-        model.addAttribute("zoneDto", zoneDto);
-        model.addAttribute("areaCode", areaCode);
-        return "zone-form";
+    public String createZoneForm(Model model) {
+        model.addAttribute("zone", new Zone());
+        return "create-zone";
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Model> createZone(@ModelAttribute ZoneDto zone, @RequestParam("areaCode") String areaCode, Model model) {
+    public ResponseEntity<String> createZone(@ModelAttribute Zone zone) {
         try {
-            ZoneDto dto = zoneService.saveZone(zone, areaCode);
-            model.addAttribute("zoneDto", dto);
-            model.addAttribute("message", "ناحیه با موفقیت ایجاد شد!");
-            return ResponseEntity.ok(model);
-        } catch (RuntimeException e) {
-            model.addAttribute("message", "خطا در ایجاد ناحیه!");
-            return ResponseEntity.status(HttpStatus.OK).body(model);
+            zoneService.saveZone(zone);
+            return ResponseEntity.ok("منطقه با موفقیت اضافه شد!");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("خطا در اضافه کردن منطقه!");
         }
     }
 
+    @GetMapping("/main")
+    public String mainPage() {
+        return "main";
+    }
 
-    @GetMapping("/get-all-zones")
-    public String getAllZones(@RequestParam("areaCode") String code, Model model) {
-        List<ZoneDto> zones = zoneService.getAllZones(code);
-        AreaDto area = areaService.getAreaByCode(code);
-        model.addAttribute("zones", zones);
-        model.addAttribute("areaCode", code);
-        model.addAttribute("areaName", area.getName());
-        return "zone-list";
+    @ModelAttribute
+    public void preventCache(HttpServletResponse response) {
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        response.setHeader("Pragma", "no-cache");
+        response.setDateHeader("Expires", 0);
     }
 
     @GetMapping("/edit-zone")
     public String editZoneForm(@RequestParam(name = "code") String code, Model model) {
-        ZoneDto zoneDto = zoneService.getZoneByCode(code);
-        model.addAttribute("zoneDto", zoneDto);
-
-        if (zoneDto.getArea() != null) {
-            model.addAttribute("areaCode", zoneDto.getArea().getCode());
-        } else {
-            model.addAttribute("areaCode", "");
-        }
-
+        Zone zone = zoneService.getZoneByCode(code);
+        model.addAttribute("zone", zone);
         return "edit-zone";
     }
 
     @PostMapping("/edit")
-    public ResponseEntity<Map<String, Object>> updateZone(@ModelAttribute ZoneDto zoneDto, @RequestParam("areaCode") String areaCode) {
-        Map<String, Object> response = new HashMap<>();
+    public ResponseEntity<Model> updateZone(@ModelAttribute Zone zone, Model model) {
         try {
-            zoneService.updateZone(areaCode, zoneDto);
-            response.put("message", "ناحیه با موفقیت ویرایش شد!");
-            return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(response);
+            Zone updateZone = zoneService.updateZone(zone.getCode(), zone);
+            model.addAttribute("zone", updateZone);
+            model.addAttribute("message", "منطقه با موفقیت ویرایش شد!");
+            return ResponseEntity.ok(model);
         } catch (Exception e) {
-            response.put("message", "خطا در ویرایش ناحیه!");
-            return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(response);
+            model.addAttribute("message", "خطا در ویرایش منطقه!");
+            return ResponseEntity.status(HttpStatus.OK).body(model);
         }
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<String> deleteZone(@RequestParam(name = "zoneId") Long id) {
-        zoneService.deleteZone(id);
-
-        return ResponseEntity.ok("ناحیه با موفقیت حذف شد!");
+    public ResponseEntity<String> deleteZone(@RequestParam(name = "code") String code) {
+        try {
+            zoneService.deleteZone(code);
+            return ResponseEntity.ok("منطقه با موفقیت حذف شد!");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("خطا در حذف منطقه!");
+        }
     }
 }

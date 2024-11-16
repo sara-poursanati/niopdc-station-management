@@ -2,59 +2,58 @@
 <html lang="fa" dir="rtl" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="~{fragments/template :: head}">
-    <title>فهرست مناطق</title>
+    <meta charset="UTF-8">
+    <title>فهرست نواحی</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body class="app sidebar-mini rtl light-mode">
 
-<div id="global-loader" th:replace="~{fragments/template :: global-loader}">
-</div>
+<div id="global-loader" th:replace="~{fragments/template :: global-loader}"></div>
+
 <div class="page">
     <div class="page-main">
 
         <div class="app-header header sticky" th:replace="~{fragments/template :: app-header}">
         </div>
-
         <div class="sticky" th:replace="~{fragments/template :: app-sidebar}">
         </div>
 
         <div class="main-content app-content mt-0">
             <div class="side-app">
                 <div class="main-container container-fluid">
-                    <div class="header mb-4" style="background-color: transparent; padding: 1rem 0;">
-                        <h1>فهرست مناطق</h1>
-                        <a href="/page/areas/create-area" class="btn btn-success btn-sm">اضافه کردن منطقه</a>
-                    </div>
 
-                    <div id="message" th:if="${message != null}"
-                         th:classappend="${success ? 'alert-success' : 'alert-danger'} alert">
-                        <span th:text="${message}"></span>
+                    <div class="header mb-4" style="background-color: transparent; padding: 1rem 0;">
+                        <h1>فهرست نواحی
+                            <span th:text="'منطقه ' + ${zoneName}"></span>
+                        </h1>
+                        <a href="/page/zones/get-all-zones" class="btn btn-info btn-sm">بازگشت</a>
+                        <a th:href="@{/page/areas/create-area(zoneCode=${zoneCode})}"
+                           class="btn btn-success btn-sm">افزودن ناحیه</a>
+
                     </div>
 
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered">
+                        <table class="table table-bordered table-striped">
                             <thead>
                             <tr>
-                                <th>نام</th>
-                                <th>کد</th>
+                                <th>نام ناحیه</th>
+                                <th>کد ناحیه</th>
+                                <th>کد منطقه</th>
                                 <th>عملیات</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr th:each="area : ${areas}">
-                                <td th:text="${area.name}">نام نمونه</td>
-                                <td th:text="${area.code}">کد نمونه</td>
+                                <td th:text="${area.name}"></td>
+                                <td th:text="${area.code}"></td>
+                                <td th:text="${area.zone.code}"></td>
                                 <td>
                                     <a th:href="@{/page/areas/edit-area(code=${area.code})}"
-                                       class="btn btn-primary btn-sm">ویرایش</a>
-
-                                    <a href="#"
-                                       class="btn btn-danger btn-sm"
-                                       th:attr="data-code=${area.code}"
-                                       onclick="confirmDelete(event, this)">حذف</a>
-
-                                    <a th:href="@{/page/zones/get-all-zones(areaCode=${area.code})}"
-                                       class="btn btn-warning btn-sm">فهرست نواحی</a>
+                                       class="btn btn-warning btn-sm">ویرایش</a>
+                                    <a href="#" class="btn btn-danger btn-sm"
+                                       th:attr="data-code=${area.id}"
+                                       onclick="confirmDeleteZone(event, this)">حذف</a>
                                 </td>
                             </tr>
                             </tbody>
@@ -64,35 +63,35 @@
             </div>
         </div>
     </div>
-    <footer class="footer" th:replace="~{fragments/template :: app-footer}">
-    </footer>
+    <footer class="footer" th:replace="~{fragments/template :: app-footer}"></footer>
+
 </div>
 <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
 
-<div th:replace="~{fragments/template :: scripts}">
-</div>
+<div th:replace="~{fragments/template :: scripts}"></div>
 
 <script>
-    function confirmDelete(event, element) {
+    function confirmDeleteZone(event, element) {
         event.preventDefault();
+        const areaId = element.getAttribute('data-code');
 
-        const code = element.getAttribute('data-code');
-
-        if (confirm("آیا مطمئن هستید که میخواهید این منطقه را حذف کنید؟")) {
+        if (confirm("آیا مطمئن هستید که میخواهید این ناحیه را حذف کنید؟")) {
             $.ajax({
                 type: 'DELETE',
-                url: '/page/areas/delete?code=' + code,
+                url: '/page/areas/delete?areaId=' + areaId,
                 success: function (response) {
                     alert(response);
                     location.reload();
                 },
                 error: function (xhr) {
-                    alert("خطا در حذف منطقه!");
+                    console.log(xhr);
+                    alert("خطا در حذف ناحیه!");
                 }
             });
+
         }
     }
-</script>
 
+</script>
 </body>
 </html>

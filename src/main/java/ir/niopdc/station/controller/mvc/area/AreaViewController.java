@@ -1,87 +1,92 @@
 package ir.niopdc.station.controller.mvc.area;
 
 
+import ir.niopdc.domain.area.Area;
 import ir.niopdc.domain.area.AreaService;
-import ir.niopdc.domain.area.dto.AreaDto;
-import jakarta.servlet.http.HttpServletResponse;
+import ir.niopdc.domain.zone.Zone;
+import ir.niopdc.domain.zone.ZoneService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/page/areas")
 public class AreaViewController {
 
-    private final AreaService areaServiceImpl;
-
-    @GetMapping("/get-all-areas")
-    public String getAllAreas(Model model) {
-        List<AreaDto> areas = areaServiceImpl.getAllAreas();
-        model.addAttribute("areas", areas);
-        return "area-list";
-    }
+    private final ZoneService zoneService;
+    private final AreaService areaService;
 
     @GetMapping("/create-area")
-    public String createAreaForm(Model model) {
-        model.addAttribute("areaDto", new AreaDto());
-        return "create-area";
+    public String createAreaForm(@RequestParam("zoneCode") String zoneCode, Model model) {
+        Area area = new Area();
+        model.addAttribute("area", area);
+        model.addAttribute("zoneCode", zoneCode);
+        return "area-form";
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> createArea(@ModelAttribute AreaDto areaDto) {
+    public ResponseEntity<Model> createArea(@ModelAttribute Area area, @RequestParam("zoneCode") String zoneCode, Model model) {
         try {
-            areaServiceImpl.saveArea(areaDto);
-            return ResponseEntity.ok("منطقه با موفقیت اضافه شد!");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("خطا در اضافه کردن منطقه!");
-        }
-    }
-
-    @GetMapping("/main")
-    public String mainPage() {
-        return "main";
-    }
-
-    @ModelAttribute
-    public void preventCache(HttpServletResponse response) {
-        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-        response.setHeader("Pragma", "no-cache");
-        response.setDateHeader("Expires", 0);
-    }
-
-    @GetMapping("/edit-area")
-    public String editAreaForm(@RequestParam(name = "code") String code, Model model) {
-        AreaDto areaDto = areaServiceImpl.getAreaByCode(code);
-        model.addAttribute("areaDto", areaDto);
-        return "edit-area";
-    }
-
-    @PostMapping("/edit")
-    public ResponseEntity<Model> updateArea(@ModelAttribute AreaDto areaDto, Model model) {
-        try {
-            AreaDto dto = areaServiceImpl.updateArea(areaDto.getCode(), areaDto);
-            model.addAttribute("areaDto", dto);
-            model.addAttribute("message", "منطقه با موفقیت ویرایش شد!");
+            Area savedArea = areaService.saveArea(area, zoneCode);
+            model.addAttribute("area", savedArea);
+            model.addAttribute("message", "ناحیه با موفقیت ایجاد شد!");
             return ResponseEntity.ok(model);
-        } catch (Exception e) {
-            model.addAttribute("message", "خطا در ویرایش منطقه!");
+        } catch (RuntimeException e) {
+            model.addAttribute("message", "خطا در ایجاد ناحیه!");
             return ResponseEntity.status(HttpStatus.OK).body(model);
         }
     }
 
-    @DeleteMapping("/delete")
-    public ResponseEntity<String> deleteArea(@RequestParam(name = "code") String code) {
-        try {
-            areaServiceImpl.deleteArea(code);
-            return ResponseEntity.ok("منطقه با موفقیت حذف شد!");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("خطا در حذف منطقه!");
+
+    @GetMapping("/get-all-areas")
+    public String getAllAreas(@RequestParam("zoneCode") String code, Model model) {
+        List<Area> areas = areaService.getAllAreas(code);
+        Zone zone = zoneService.getZoneByCode(code);
+        model.addAttribute("areas", areas);
+        model.addAttribute("zoneCode", code);
+        model.addAttribute("zoneName", zone.getName());
+        return "area-list";
+    }
+
+    @GetMapping("/edit-area")
+    public String editAreaForm(@RequestParam(name = "code") String code, Model model) {
+        Area area = areaService.getAreaByCode(code);
+        model.addAttribute("area", area);
+
+        if (area.getZone() != null) {
+            model.addAttribute("zoneCode", area.getZone().getCode());
+        } else {
+            model.addAttribute("zoneCode", "");
         }
+
+        return "edit-area";
+    }
+
+    @PostMapping("/edit")
+    public ResponseEntity<Map<String, Object>> updateArea(@ModelAttribute Area area, @RequestParam("zoneCode") String zoneCode) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            areaService.updateArea(zoneCode, area);
+            response.put("message", "ناحیه با موفقیت ویرایش شد!");
+            return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(response);
+        } catch (Exception e) {
+            response.put("message", "خطا در ویرایش ناحیه!");
+            return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(response);
+        }
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<String> deleteArea(@RequestParam(name = "areaId") Long id) {
+        areaService.deleteArea(id);
+        return ResponseEntity.ok("ناحیه با موفقیت حذف شد!");
     }
 }
