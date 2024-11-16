@@ -1,6 +1,7 @@
 package ir.niopdc.station.controller.mvc.zone;
 
 
+import ir.niopdc.domain.area.Area;
 import ir.niopdc.domain.area.AreaService;
 import ir.niopdc.domain.area.dto.AreaDto;
 import ir.niopdc.domain.zone.ZoneService;
@@ -24,6 +25,7 @@ import java.util.Map;
 public class ZoneViewController {
 
     private final ZoneService zoneService;
+    private final AreaService areaService;
 
     @GetMapping("/create-zone")
     public String showCreateZoneForm(@RequestParam("areaCode") String areaCode, Model model) {
@@ -50,7 +52,10 @@ public class ZoneViewController {
     @GetMapping("/get-all-zones")
     public String getAllZones(@RequestParam("areaCode") String code, Model model) {
         List<ZoneDto> zones = zoneService.getAllZones(code);
+        AreaDto area = areaService.getAreaByCode(code);
         model.addAttribute("zones", zones);
+        model.addAttribute("areaCode", code);
+        model.addAttribute("areaName", area.getName());
         return "zone-list";
     }
 
@@ -69,7 +74,7 @@ public class ZoneViewController {
     }
 
     @PostMapping("/edit")
-    public ResponseEntity<Map<String, Object>> updateZone(@ModelAttribute  ZoneDto zoneDto, @RequestParam("areaCode") String areaCode) {
+    public ResponseEntity<Map<String, Object>> updateZone(@ModelAttribute ZoneDto zoneDto, @RequestParam("areaCode") String areaCode) {
         Map<String, Object> response = new HashMap<>();
         try {
             zoneService.updateZone(areaCode, zoneDto);
