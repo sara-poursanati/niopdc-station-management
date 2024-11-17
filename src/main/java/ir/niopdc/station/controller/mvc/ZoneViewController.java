@@ -1,4 +1,4 @@
-package ir.niopdc.station.controller.mvc.zone;
+package ir.niopdc.station.controller.mvc;
 
 
 import ir.niopdc.domain.zone.Zone;

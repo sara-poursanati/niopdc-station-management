@@ -1,4 +1,4 @@
-package ir.niopdc.station.controller.mvc.area;
+package ir.niopdc.station.controller.mvc;
 
 
 import ir.niopdc.domain.area.Area;
