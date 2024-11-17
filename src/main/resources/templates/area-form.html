@@ -77,7 +77,7 @@
                     $('#createAreaForm')[0].reset();
                 },
                 error: function (xhr) {
-                    var errorMessage = xhr.responseText || xhr.statusText;
+                    const errorMessage = xhr.responseText || xhr.statusText;
                     $('#responseMessage').html('<div class="alert alert-danger">' + errorMessage + '</div>');
                     $('#createAreaForm')[0].reset();
                 }

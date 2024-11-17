@@ -34,15 +34,17 @@ public class AreaViewController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Model> createArea(@ModelAttribute Area area, @RequestParam("zoneCode") String zoneCode, Model model) {
+    public ResponseEntity<Map<String, String>> createArea(
+            @ModelAttribute Area area,
+            @RequestParam("zoneCode") String zoneCode) {
+        Map<String, String> response = new HashMap<>();
         try {
-            Area savedArea = areaService.saveArea(area, zoneCode);
-            model.addAttribute("area", savedArea);
-            model.addAttribute("message", "ناحیه با موفقیت ایجاد شد!");
-            return ResponseEntity.ok(model);
+            areaService.saveArea(area, zoneCode);
+            response.put("message", "ناحیه با موفقیت ایجاد شد!");
+            return ResponseEntity.ok(response);
         } catch (RuntimeException e) {
-            model.addAttribute("message", "خطا در ایجاد ناحیه!");
-            return ResponseEntity.status(HttpStatus.OK).body(model);
+            response.put("message", "خطا در ایجاد ناحیه!");
+            return ResponseEntity.status(HttpStatus.OK).body(response);
         }
     }
 
