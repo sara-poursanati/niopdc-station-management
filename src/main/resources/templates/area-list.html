@@ -28,9 +28,8 @@
                             <span th:text="'منطقه ' + ${zoneName}"></span>
                         </h1>
                         <a href="/page/zones/get-all-zones" class="btn btn-info btn-sm">بازگشت</a>
-                        <a th:href="@{/page/areas/create-area(zoneCode=${zoneCode})}"
+                        <a th:href="@{/page/areas/create-area(zoneId=${zoneId})}"
                            class="btn btn-success btn-sm">افزودن ناحیه</a>
-
                     </div>
 
                     <div class="table-responsive">
@@ -47,10 +46,9 @@
                             <tr th:each="area : ${areas}">
                                 <td th:text="${area.name}"></td>
                                 <td th:text="${area.code}"></td>
-                                <td th:text="${area.zone.code}"></td>
+                                <td th:text="${area.zone != null ? area.zone.code : ''}"></td>
                                 <td>
-                                    <a th:href="@{/page/areas/edit-area(code=${area.code})}"
-                                       class="btn btn-warning btn-sm">ویرایش</a>
+                                    <a th:href="@{/page/areas/edit-area(areaId=${area.id})}" class="btn btn-warning btn-sm">ویرایش</a>
                                     <a href="#" class="btn btn-danger btn-sm"
                                        th:attr="data-code=${area.id}"
                                        onclick="confirmDeleteZone(event, this)">حذف</a>

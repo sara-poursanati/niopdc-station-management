@@ -31,22 +31,18 @@
 
                     <div class="area-list-container">
                         <form id="editZoneForm" th:action="@{/page/zones/edit}" th:object="${zone}" method="post">
+                            <input type="hidden" th:field="*{id}" />
                             <div class="row justify-content-center">
                                 <div class="col-md-4">
-
                                     <div class="mb-3">
                                         <label for="name">نام:</label>
                                         <input type="text" id="name" th:field="*{name}" required class="form-control"/>
                                     </div>
-
                                     <div class="mb-3">
                                         <label for="code">کد:</label>
-                                        <input type="text" id="code" th:field="*{code}" required readonly
-                                               class="form-control"/>
+                                        <input type="text" id="code" th:field="*{code}" required readonly class="form-control"/>
                                     </div>
-                                    <button type="button" id="saveChangesButton" class="btn btn-success">ذخیره تغییرات
-                                    </button>
-
+                                    <button type="button" id="saveChangesButton" class="btn btn-success">ذخیره تغییرات</button>
                                 </div>
                             </div>
                         </form>

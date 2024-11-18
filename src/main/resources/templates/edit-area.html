@@ -31,36 +31,32 @@
 
                     <div class="area-list-container">
                         <form id="editAreaForm" th:action="@{/page/areas/edit}" th:object="${area}" method="post">
-                            <input type="hidden" id="zoneCode" name="zoneCode" th:value="${zoneCode}"/>
-
+                            <input type="hidden" th:field="*{id}"/>
                             <div class="row justify-content-center">
                                 <div class="col-md-4">
-
                                     <div class="mb-3">
                                         <label for="name">نام:</label>
                                         <input type="text" id="name" th:field="*{name}" required class="form-control"/>
                                     </div>
-
                                     <div class="mb-3">
                                         <label for="code">کد:</label>
                                         <input type="text" id="code" th:field="*{code}" required readonly
                                                class="form-control"/>
                                     </div>
-
                                     <button type="button" id="saveChangesButton" class="btn btn-success">ذخیره تغییرات
                                     </button>
-
                                 </div>
                             </div>
                         </form>
-
                         <div id="responseMessage" class="mt-3"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
     <footer class="footer" th:replace="~{fragments/template :: app-footer}"></footer>
+
 </div>
 
 <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
@@ -75,15 +71,10 @@
                 url: $('#editAreaForm').attr('action'),
                 data: $('#editAreaForm').serialize(),
                 success: function (response) {
-                    if (response.message) {
-                        $('#responseMessage').html('<div class="alert alert-success">' + response.message + '</div>');
-                    } else {
-                        $('#responseMessage').html('<div class="alert alert-danger">Unknown error occurred!</div>');
-                    }
+                    $('#responseMessage').html('<div class="alert alert-success">' + response.message + '</div>');
                 },
                 error: function (xhr) {
-                    var errorMessage = xhr.responseText || xhr.statusText;
-                    $('#responseMessage').html('<div class="alert alert-danger">' + errorMessage + '</div>');
+                    $('#responseMessage').html('<div class="alert alert-danger">' + xhr.responseText + '</div>');
                 }
             });
         });

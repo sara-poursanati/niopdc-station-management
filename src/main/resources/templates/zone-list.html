@@ -45,15 +45,15 @@
                                 <td th:text="${zone.name}">نام نمونه</td>
                                 <td th:text="${zone.code}">کد نمونه</td>
                                 <td>
-                                    <a th:href="@{/page/zones/edit-zone(code=${zone.code})}"
+                                    <a th:href="@{/page/zones/edit-zone(zoneId=${zone.id})}"
                                        class="btn btn-primary btn-sm">ویرایش</a>
 
                                     <a href="#"
                                        class="btn btn-danger btn-sm"
-                                       th:attr="data-code=${zone.code}"
+                                       th:attr="data-code=${zone.id}"
                                        onclick="confirmDelete(event, this)">حذف</a>
 
-                                    <a th:href="@{/page/areas/get-all-areas(zoneCode=${zone.code})}"
+                                    <a th:href="@{/page/areas/get-all-areas(zoneId=${zone.id})}"
                                        class="btn btn-warning btn-sm">فهرست نواحی</a>
                                 </td>
                             </tr>
@@ -76,12 +76,12 @@
     function confirmDelete(event, element) {
         event.preventDefault();
 
-        const code = element.getAttribute('data-code');
+        const zoneId = element.getAttribute('data-code');
 
         if (confirm("آیا مطمئن هستید که میخواهید این منطقه را حذف کنید؟")) {
             $.ajax({
                 type: 'DELETE',
-                url: '/page/zones/delete?code=' + code,
+                url: '/page/zones/delete?zoneId=' + zoneId,
                 success: function (response) {
                     alert(response);
                     location.reload();

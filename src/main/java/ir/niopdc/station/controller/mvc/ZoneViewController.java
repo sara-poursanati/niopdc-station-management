@@ -22,7 +22,7 @@ public class ZoneViewController {
 
     @GetMapping("/get-all-zones")
     public String getAllZones(Model model) {
-        List<Zone> zones = zoneService.getAllZones();
+        List<Zone> zones = zoneService.findAll();
         model.addAttribute("zones", zones);
         return "zone-list";
     }
@@ -36,7 +36,7 @@ public class ZoneViewController {
     @PostMapping("/create")
     public ResponseEntity<String> createZone(@ModelAttribute Zone zone) {
         try {
-            zoneService.saveZone(zone);
+            zoneService.save(zone);
             return ResponseEntity.ok("منطقه با موفقیت اضافه شد!");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("خطا در اضافه کردن منطقه!");
@@ -56,8 +56,8 @@ public class ZoneViewController {
     }
 
     @GetMapping("/edit-zone")
-    public String editZoneForm(@RequestParam(name = "code") String code, Model model) {
-        Zone zone = zoneService.getZoneByCode(code);
+    public String editZoneForm(@RequestParam("zoneId") Long zoneId, Model model) {
+        Zone zone = zoneService.findById(zoneId);
         model.addAttribute("zone", zone);
         return "edit-zone";
     }
@@ -65,20 +65,28 @@ public class ZoneViewController {
     @PostMapping("/edit")
     public ResponseEntity<Model> updateZone(@ModelAttribute Zone zone, Model model) {
         try {
-            Zone updateZone = zoneService.updateZone(zone.getCode(), zone);
-            model.addAttribute("zone", updateZone);
-            model.addAttribute("message", "منطقه با موفقیت ویرایش شد!");
-            return ResponseEntity.ok(model);
+            Zone existingZone = zoneService.findById(zone.getId());
+            if (existingZone != null) {
+                existingZone.setName(zone.getName());
+                Zone updatedZone = zoneService.update(existingZone);
+                model.addAttribute("zone", updatedZone);
+                model.addAttribute("message", "منطقه با موفقیت ویرایش شد!");
+                return ResponseEntity.ok(model);
+            } else {
+                model.addAttribute("message", "منطقه پیدا نشد!");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(model);
+            }
         } catch (Exception e) {
             model.addAttribute("message", "خطا در ویرایش منطقه!");
-            return ResponseEntity.status(HttpStatus.OK).body(model);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(model);
         }
     }
 
+
     @DeleteMapping("/delete")
-    public ResponseEntity<String> deleteZone(@RequestParam(name = "code") String code) {
+    public ResponseEntity<String> deleteZone(@RequestParam("zoneId") Long zoneId) {
         try {
-            zoneService.deleteZone(code);
+            zoneService.deleteById(zoneId);
             return ResponseEntity.ok("منطقه با موفقیت حذف شد!");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("خطا در حذف منطقه!");

@@ -26,43 +26,42 @@ public class AreaViewController {
     private final AreaService areaService;
 
     @GetMapping("/create-area")
-    public String createAreaForm(@RequestParam("zoneCode") String zoneCode, Model model) {
+    public String createAreaForm(@RequestParam("zoneId") Long zoneId, Model model) {
         Area area = new Area();
         model.addAttribute("area", area);
-        model.addAttribute("zoneCode", zoneCode);
+        model.addAttribute("zoneId", zoneId);
         return "area-form";
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Map<String, String>> createArea(
-            @ModelAttribute Area area,
-            @RequestParam("zoneCode") String zoneCode) {
+    public ResponseEntity<Map<String, String>> createArea(@ModelAttribute Area area, @RequestParam("zoneId") Long zoneId) {
         Map<String, String> response = new HashMap<>();
         try {
-            areaService.saveArea(area, zoneCode);
+            Zone zone = zoneService.findById(zoneId);
+            area.setZone(zone);
+            areaService.save(area);
             response.put("message", "ناحیه با موفقیت ایجاد شد!");
             return ResponseEntity.ok(response);
         } catch (RuntimeException e) {
             response.put("message", "خطا در ایجاد ناحیه!");
-            return ResponseEntity.status(HttpStatus.OK).body(response);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
 
-
     @GetMapping("/get-all-areas")
-    public String getAllAreas(@RequestParam("zoneCode") String code, Model model) {
-        List<Area> areas = areaService.getAllAreas(code);
-        Zone zone = zoneService.getZoneByCode(code);
+    public String getAllAreas(@RequestParam("zoneId") Long zoneId, Model model) {
+        Zone zone = zoneService.findById(zoneId);
+        List<Area> areas = zone.getAreas();
+
         model.addAttribute("areas", areas);
-        model.addAttribute("zoneCode", code);
+        model.addAttribute("zoneId", zoneId);
         model.addAttribute("zoneName", zone.getName());
         return "area-list";
     }
 
     @GetMapping("/edit-area")
-    public String editAreaForm(@RequestParam(name = "code") String code, Model model) {
-        Area area = areaService.getAreaByCode(code);
-        model.addAttribute("area", area);
+    public String editAreaForm(@RequestParam("areaId") Long areaId, Model model) {
+        Area area = areaService.findById(areaId);
 
         if (area.getZone() != null) {
             model.addAttribute("zoneCode", area.getZone().getCode());
@@ -73,11 +72,11 @@ public class AreaViewController {
         return "edit-area";
     }
 
-    @PostMapping("/edit")
-    public ResponseEntity<Map<String, Object>> updateArea(@ModelAttribute Area area, @RequestParam("zoneCode") String zoneCode) {
+        @PostMapping("/edit")
+    public ResponseEntity<Map<String, Object>> updateArea(@ModelAttribute Area area) {
         Map<String, Object> response = new HashMap<>();
         try {
-            areaService.updateArea(zoneCode, area);
+            areaService.update(area);
             response.put("message", "ناحیه با موفقیت ویرایش شد!");
             return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(response);
         } catch (Exception e) {
@@ -88,7 +87,7 @@ public class AreaViewController {
 
     @DeleteMapping("/delete")
     public ResponseEntity<String> deleteArea(@RequestParam(name = "areaId") Long id) {
-        areaService.deleteArea(id);
+        areaService.deleteById(id);
         return ResponseEntity.ok("ناحیه با موفقیت حذف شد!");
     }
 }
