@@ -44,7 +44,7 @@
 
                     <!-- TABLE -->
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered">
+                        <table class="table border text-nowrap text-md-nowrap table-bordered mb-0">
                             <thead>
                             <tr>
                                 <th>شماره سریال</th>
@@ -57,13 +57,13 @@
                                 <td>
                                     <div style="display: flex; gap: 5px;">
                                         <form th:action="@{/media-gateway/delete}" method="delete"
-                                              th:onsubmit="return confirm('آیا مطمئن هستید؟')">
+                                              th:onsubmit="return confirm('آیا از حذف این سرور مطمئن هستید؟')">
                                             <input type="hidden" name="serialNumber" th:value="${mediaGateway.serialNumber}">
                                             <button type="submit" class="btn btn-danger btn-sm">حذف</button>
                                         </form>
                                         <a th:href="@{'/media-gateway/add-fuel-station/' + ${mediaGateway.serialNumber}}"
                                            class="btn btn-primary btn-sm">
-                                            افزودن جایگاه
+                                            تخصیص جایگاه
                                         </a>
                                     </div>
                                 </td>
