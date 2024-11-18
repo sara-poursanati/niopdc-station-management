@@ -34,19 +34,19 @@
                     <!-- HEADER -->
                     <div class="header mb-4" style="background-color: transparent; padding: 1rem 0;">
                         <h2>افزودن سرور جدید</h2>
-                        <a href="/media-gateway/list" class="btn btn-link">بازگشت</a>
                     </div>
 
                     <!-- FORM -->
                     <div class="server-form-container">
                         <form id="createServerForm" th:action="@{/media-gateway/create}" th:object="${mediaGateway}" method="post">
-                            <div class="row justify-content-center">
+                            <div class="row justify-content-right">
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="serialNumber">شماره سریال:</label>
                                         <input type="text" id="serialNumber" th:field="*{serialNumber}" class="form-control" placeholder="وارد کنید" required maxlength="30"/>
                                     </div>
                                     <button type="submit" class="btn btn-success">ذخیره</button>
+                                    <a href="/media-gateway/list" class="btn btn-primary">بازگشت</a>
                                 </div>
                             </div>
                         </form>
