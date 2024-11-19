@@ -86,7 +86,7 @@ public class ZoneViewController {
             Zone zone = zoneService.findById(zoneId);
             if (zone.getAreas() != null && !zone.getAreas().isEmpty()) {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                        .body(messageSource.getMessage("zone_has_related_areas", null, locale)); // Custom message for zones with areas
+                        .body(messageSource.getMessage("zone_has_related_areas", null, locale));
             }
             zoneService.deleteById(zoneId);
             return ResponseEntity.ok(messageSource.getMessage("zone_deleted_successfully", null, locale));

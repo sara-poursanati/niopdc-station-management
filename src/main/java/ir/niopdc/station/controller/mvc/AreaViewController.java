@@ -70,10 +70,8 @@ public class AreaViewController {
 
         if (area.getZone() != null) {
             model.addAttribute("zoneId", area.getZone().getId());
-            model.addAttribute("zoneCode", area.getZone().getCode());
         } else {
             model.addAttribute("zoneId", "");
-            model.addAttribute("zoneCode", "");
         }
         model.addAttribute("area", area);
         return "edit-area";
