@@ -46,11 +46,6 @@ public class ZoneViewController {
         }
     }
 
-    @GetMapping("/main")
-    public String mainPage() {
-        return "main";
-    }
-
     @ModelAttribute
     public void preventCache(HttpServletResponse response) {
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
