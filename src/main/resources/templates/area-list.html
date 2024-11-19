@@ -24,7 +24,8 @@
                             <span th:text="'منطقه ' + ${zoneName}"></span>
                         </h1>
                         <a href="/page/zones/get-all-zones" class="btn btn-info btn-sm">بازگشت</a>
-                        <a th:href="@{/page/areas/create-area(zoneId=${zoneId})}" class="btn btn-success btn-sm">افزودن ناحیه</a>
+                        <a th:href="@{/page/areas/create-area(zoneId=${zoneId})}" class="btn btn-success btn-sm">افزودن
+                            ناحیه</a>
                     </div>
 
                     <div class="table-responsive">
@@ -94,12 +95,14 @@
                     location.reload();
                 },
                 error: function (xhr) {
-                    alert("خطا در حذف ناحیه!");
+                    var errorMessage = xhr.responseText || "خطا در حذف ناحیه!";
+                    alert(errorMessage);
                 }
             });
         }
     }
 </script>
+
 
 </body>
 
