@@ -31,7 +31,8 @@
 
                     <div class="area-list-container">
                         <form id="editAreaForm" th:action="@{/page/areas/edit}" th:object="${area}" method="post">
-                            <input type="hidden" th:field="*{id}"/>
+                            <input type="hidden" th:field="*{id}" />
+                            <input type="hidden" name="zoneId" th:value="${zoneId}" />
                             <div class="row justify-content-center">
                                 <div class="col-md-4">
                                     <div class="mb-3">
