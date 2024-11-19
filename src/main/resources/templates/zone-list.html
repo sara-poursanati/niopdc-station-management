@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="fa" dir="rtl" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/template :: head}">
+    <title>فهرست مناطق</title>
+</head>
+
+<body class="app sidebar-mini rtl light-mode">
+
+<div id="global-loader" th:replace="~{fragments/template :: global-loader}"></div>
+
+<div class="page">
+    <div class="page-main">
+
+        <div class="app-header header sticky" th:replace="~{fragments/template :: app-header}"></div>
+
+        <div class="sticky" th:replace="~{fragments/template :: app-sidebar}"></div>
+
+        <div class="main-content app-content mt-0">
+            <div class="side-app">
+                <div class="main-container container-fluid">
+                    <div class="header mb-4" style="background-color: transparent; padding: 1rem 0;">
+                        <h1>فهرست مناطق</h1>
+                        <a href="/page/zones/create-zone" class="btn btn-success btn-sm">اضافه کردن منطقه</a>
+                    </div>
+
+                    <div id="message" th:if="${message != null}"
+                         th:classappend="${success ? 'alert-success' : 'alert-danger'} alert">
+                        <span th:text="${message}"></span>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table id="data-table" class="table table-bordered text-center text-nowrap mb-0">
+                            <thead>
+                            <tr>
+                                <th class="bg-transparent border-bottom-1" style="width: 30%;">نام</th>
+                                <th class="bg-transparent border-bottom-1" style="width: 30%;">کد</th>
+                                <th class="bg-transparent border-bottom-1" style="width: 40%;">عملیات</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="zone : ${zones}">
+                                <td class="text-center border-bottom-1">
+                                    <div class="mt-0 mt-sm-2 d-block">
+                                        <h6 class="mb-0 fs-14 fw-semibold" th:text="${zone.name}">نام نمونه</h6>
+                                    </div>
+                                </td>
+                                <td class="border-bottom-1">
+                                    <span class="fw-semibold mt-sm-2 d-block" th:text="${zone.code}">کد نمونه</span>
+                                </td>
+                                <td class="border-bottom-1">
+                                    <div class="d-flex justify-content-center g-2">
+                                        <a th:href="@{/page/zones/edit-zone(zoneId=${zone.id})}"
+                                           class="btn text-primary btn-sm" data-bs-toggle="tooltip"
+                                           data-bs-original-title="ویرایش">
+                                            <span class="fe fe-edit fs-14"></span>
+                                        </a>
+                                        <a href="#" class="btn text-danger btn-sm mx-2" data-bs-toggle="tooltip"
+                                           th:attr="data-code=${zone.id}" data-bs-original-title="حذف"
+                                           onclick="confirmDelete(event, this)">
+                                            <span class="fe fe-trash-2 fs-14"></span>
+                                        </a>
+                                        <a th:href="@{/page/areas/get-all-areas(zoneId=${zone.id})}"
+                                           class="btn text-warning btn-sm" data-bs-toggle="tooltip"
+                                           data-bs-original-title="فهرست نواحی">
+                                            <span class="fe fe-list fs-14"></span>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer" th:replace="~{fragments/template :: app-footer}"></footer>
+    </div>
+
+    <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
+
+    <div th:replace="~{fragments/template :: scripts}"></div>
+
+    <script>
+        function confirmDelete(event, element) {
+            event.preventDefault();
+
+            const zoneId = element.getAttribute('data-code');
+
+            if (confirm("آیا مطمئن هستید که میخواهید این منطقه را حذف کنید؟")) {
+                $.ajax({
+                    type: 'DELETE',
+                    url: '/page/zones/delete?zoneId=' + zoneId,
+                    success: function (response) {
+                        alert(response);
+                        location.reload();
+                    },
+                    error: function (xhr) {
+                        var errorMessage = xhr.responseText || "خطا در حذف منطقه!";
+                        alert(errorMessage);
+                    }
+                });
+            }
+        }
+    </script>
+
+</div>
+
+</body>
+
+</html>
