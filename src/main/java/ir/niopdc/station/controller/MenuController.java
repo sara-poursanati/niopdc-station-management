@@ -1,10 +1,9 @@
 package ir.niopdc.station.controller;
 
 import ir.niopdc.domain.menu.Menu;
-import ir.niopdc.domain.menu.MenuDTO;
 import ir.niopdc.domain.menu.MenuService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,27 +11,23 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/menus")
 @RequiredArgsConstructor
 public class MenuController {
 
     private final MenuService menuService;
 
-    @GetMapping("/api/menus")
-    public List<MenuDTO> getMenus() {
-        return menuService.findAll().stream().map(menu -> {
-            MenuDTO dto = new MenuDTO();
-            dto.setName(menu.getName());
-            return dto;
-        }).toList();
+    @GetMapping("/all-menu")
+    public List<Menu> getAllMenus() {
+        return menuService.findAll();
     }
 
-    @GetMapping("/showMenu")
-    public String showMenu() {
-        List<Menu> menuDTOS = menuService.findAll();
+    @GetMapping("/menu-page")
+    public String getMenuPage(Model model) {
+        List<Menu> menus = menuService.findAll();
+        model.addAttribute("menus", menus);
         return "template";
     }
-
 
 
 }
