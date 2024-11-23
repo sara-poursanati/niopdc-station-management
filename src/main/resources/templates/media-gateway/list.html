@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en" dir="rtl" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/template :: head}">
+    <title>لیست سرورها</title>
+</head>
+
+<body class="app sidebar-mini rtl light-mode">
+
+<!-- GLOBAL-LOADER -->
+<div id="global-loader" th:replace="~{fragments/template :: global-loader}">
+</div>
+<!-- /GLOBAL-LOADER -->
+
+<!-- PAGE -->
+<div class="page">
+    <div class="page-main">
+
+        <!-- app-Header -->
+        <div class="app-header header sticky" th:replace="~{fragments/template :: app-header}">
+        </div>
+        <!-- /app-Header -->
+
+        <!--APP-SIDEBAR-->
+        <div class="sticky" th:replace="~{fragments/template :: app-sidebar}">
+        </div>
+
+        <!--app-content open-->
+        <div class="main-content app-content mt-0">
+            <div class="side-app">
+                <!-- CONTAINER -->
+                <div class="main-container container-fluid">
+                    <!-- HEADER -->
+                    <div class="header mb-4" style="background-color: transparent; padding: 1rem 0;">
+                        <h1>لیست سرورها</h1>
+                        <a th:href="@{/media-gateway/create}" class="btn btn-success btn-sm">افزودن سرور جدید</a>
+                    </div>
+
+                    <!-- MESSAGE ALERT -->
+                    <div id="message" th:if="${message != null}"
+                         th:classappend="${success ? 'alert-success' : 'alert-danger'} alert">
+                        <span th:text="${message}"></span>
+                    </div>
+
+                    <!-- TABLE -->
+                    <div class="table-responsive">
+                        <table class="table border text-nowrap text-md-nowrap table-bordered mb-0">
+                            <thead>
+                            <tr>
+                                <th>شماره سریال</th>
+                                <th>عملیات</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="mediaGateway : ${mediaGateways}">
+                                <td th:text="${mediaGateway.serialNumber}"></td>
+                                <td>
+                                    <div style="display: flex; gap: 5px;">
+                                        <form th:action="@{/media-gateway/delete}" method="delete"
+                                              th:onsubmit="return confirm('آیا از حذف این سرور مطمئن هستید؟')">
+                                            <input type="hidden" name="serialNumber" th:value="${mediaGateway.serialNumber}">
+                                            <button type="submit" class="btn btn-danger btn-sm">حذف</button>
+                                        </form>
+                                        <a th:href="@{'/media-gateway/add-fuel-station/' + ${mediaGateway.serialNumber}}"
+                                           class="btn btn-primary btn-sm">
+                                            تخصیص جایگاه
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- TABLE END -->
+
+                </div>
+                <!-- CONTAINER END -->
+            </div>
+        </div>
+        <!--app-content close-->
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer" th:replace="~{fragments/template :: app-footer}"></footer>
+    <!-- FOOTER END -->
+
+</div>
+
+<!-- BACK-TO-TOP -->
+<a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
+
+<div th:replace="~{fragments/template :: scripts}"></div>
+
+</body>
+
+
+
+</html>

@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="fa" dir="rtl" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/template :: head}">
+    <title>ایجاد سرور جدید</title>
+</head>
+
+<body class="app sidebar-mini rtl light-mode">
+
+<!-- GLOBAL-LOADER -->
+<div id="global-loader" th:replace="~{fragments/template :: global-loader}">
+</div>
+<!-- /GLOBAL-LOADER -->
+
+<!-- PAGE -->
+<div class="page">
+    <div class="page-main">
+
+        <!-- app-Header -->
+        <div class="app-header header sticky" th:replace="~{fragments/template :: app-header}">
+        </div>
+        <!-- /app-Header -->
+
+        <!--APP-SIDEBAR-->
+        <div class="sticky" th:replace="~{fragments/template :: app-sidebar}">
+        </div>
+
+        <!--app-content open-->
+        <div class="main-content app-content mt-0">
+            <div class="side-app">
+                <!-- CONTAINER -->
+                <div class="main-container container-fluid">
+
+                    <!-- HEADER -->
+                    <div class="header mb-4" style="background-color: transparent; padding: 1rem 0;">
+                        <h2>افزودن سرور جدید</h2>
+                    </div>
+
+                    <!-- FORM -->
+                    <div class="server-form-container">
+                        <form id="createServerForm" th:action="@{/media-gateway/create}" th:object="${mediaGateway}" method="post">
+                            <div class="row justify-content-right">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="serialNumber">شماره سریال:</label>
+                                        <input type="text" id="serialNumber" th:field="*{serialNumber}" class="form-control" placeholder="وارد کنید" required maxlength="30"/>
+                                    </div>
+                                    <button type="submit" class="btn btn-success">ذخیره</button>
+                                    <a href="/media-gateway/list" class="btn btn-primary">بازگشت</a>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div id="responseMessage" class="mt-3"></div>
+                    </div>
+                    <!-- FORM END -->
+
+                </div>
+                <!-- CONTAINER END -->
+            </div>
+        </div>
+        <!--app-content close-->
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer" th:replace="~{fragments/template :: app-footer}">
+    </footer>
+    <!-- FOOTER END -->
+
+</div>
+
+<!-- BACK-TO-TOP -->
+<a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
+
+<div th:replace="~{fragments/template :: scripts}">
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#createServerForm').on('submit', function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: $(this).attr('action'),
+                data: $(this).serialize(),
+                success: function (response) {
+                    $('#responseMessage').html('<div class="alert alert-success">سرور با موفقیت اضافه شد.</div>');
+                    $('#createServerForm')[0].reset();
+                },
+                error: function (xhr) {
+                    $('#responseMessage').html('<div class="alert alert-danger">خطا در اضافه کردن سرور!</div>');
+                }
+            });
+        });
+    });
+</script>
+
+
+</body>
+</html>

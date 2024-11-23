@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en" dir="rtl" xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+
+<head th:replace="~{fragments/template :: head}">
+    <title>افزودن جایگاه به سرور</title>
+</head>
+
+<body class="app sidebar-mini rtl light-mode">
+
+<!-- GLOBAL-LOADER -->
+<div id="global-loader" th:replace="~{fragments/template :: global-loader}">
+</div>
+<!-- /GLOBAL-LOADER -->
+
+<!-- PAGE -->
+<div class="page">
+    <div class="page-main">
+
+        <!-- app-Header -->
+        <div class="app-header header sticky" th:replace="~{fragments/template :: app-header}">
+        </div>
+        <!-- /app-Header -->
+
+        <!--APP-SIDEBAR-->
+        <div class="sticky" th:replace="~{fragments/template :: app-sidebar}">
+        </div>
+
+        <!--app-content open-->
+        <div class="main-content app-content mt-0">
+            <div class="side-app">
+                <!-- CONTAINER -->
+                <div class="main-container container-fluid">
+                    <div class="header mb-4" style="background-color: transparent; padding: 1rem 0;">
+                        <h1>افزودن جایگاه به سرور</h1>
+                    </div>
+
+                    <!-- FORM FOR ADDING FUEL STATION -->
+                    <form th:action="@{/media-gateway/add-fuel-station}" method="post">
+                        <input type="hidden" name="serialNumber" th:value="${serialNumber}">
+
+                        <div class="mb-3">
+                            <label for="fuelStation" class="form-label">انتخاب جایگاه</label>
+                            <select name="fuelStationId" id="fuelStation" class="form-select" required>
+                                <option value="" disabled selected>یک جایگاه انتخاب کنید</option>
+                                <option th:each="fuelStation : ${fuelStations}"
+                                        th:value="${fuelStation.id}"
+                                        th:text="${fuelStation.name}"></option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">ذخیره</button>
+                        <a th:href="@{/media-gateway/list}" class="btn btn-secondary">بازگشت به لیست</a>
+                    </form>
+                </div>
+                <!-- CONTAINER END -->
+            </div>
+        </div>
+        <!--app-content close-->
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer" th:replace="~{fragments/template :: app-footer}"></footer>
+    <!-- FOOTER END -->
+
+</div>
+
+<!-- BACK-TO-TOP -->
+<a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
+
+<div th:replace="~{fragments/template :: scripts}"></div>
+
+
+
+
+
+</body>
+</html>
