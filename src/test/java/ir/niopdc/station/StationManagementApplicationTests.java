@@ -8,6 +8,6 @@ class StationManagementApplicationTests {
 
 	@Test
 	void contextLoads() {
-	}
+    }
 
 }

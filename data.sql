@@ -1,6 +1,0 @@
-INSERT INTO `fuel_station` VALUES
-                           ('a', 'area', 'city', 'code', '1', 'name1', '1', 'address1', 'incharge_man','leslie@luv2code.com', 'contact_man', 'contact_telephone','telephone1','telephone2','fax','zip_code','1985-09-25 17:45:30.005','1','z','1985','1985','owner','1','w'),
-                           ('b', 'area', 'city', 'code', '2', 'name2', '2', 'address2', 'incharge_man','emma@luv2code.com', 'contact_man', 'contact_telephone','telephone2','telephone2','fax','zip_code','1985-09-25 17:45:30.005','2','z','1985','1985','owner','1','w'),
-                           ('c', 'area', 'city', 'code', '3', 'name3', '3', 'address3', 'incharge_man','avani@luv2code.com', 'contact_man', 'contact_telephone','telephone3','telephone2','fax','zip_code','1985-09-25 17:45:30.005','3','z','1985','1985','owner','1','w'),
-                           ('d', 'area', 'city', 'code', '4', 'name4', '4', 'address4', 'incharge_man','yuri@luv2code.com', 'contact_man', 'contact_telephone','telephone4','telephone2','fax','zip_code','1985-09-25 17:45:30.005','4','z','1985','1985','owner','1','w'),
-                           ('e', 'area', 'city', 'code', '5', 'name5', '5', 'address5', 'incharge_man','juan@luv2code.com', 'contact_man', 'contact_telephone','telephone5','telephone2','fax','zip_code','1985-09-25 17:45:30.005','5','z','1985','1985','owner','1','w');

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="~{fragments/template :: head}">
+
+</head>
+<body class="app sidebar-mini light-mode" th:classappend="${#locale.language == 'fa' ? 'rtl' : 'ltr'}">
+<!-- GLOBAL-LOADER -->
+<div id="global-loader">
+    <img src="../assets/images/loader.svg" class="loader-img" alt="Loader">
+</div>
+<!-- /GLOBAL-LOADER -->
+
+<!-- PAGE -->
+<div class="page">
+    <div class="page-main">
+
+        <!-- app-Header -->
+        <div class="app-header header sticky" th:replace="~{fragments/template :: app-header}">
+
+        </div>
+        <!-- /app-Header -->
+
+        <!--APP-SIDEBAR-->
+        <div class="sticky" th:replace="~{fragments/template :: sidebar}">
+            <!--/APP-SIDEBAR-->
+        </div>
+
+        <div class="container" th:object="${fuelTerminal}">
+            <br>
+            <div class="page-header">
+                <h1 class="page-title" th:text="#{infoPage}"></h1>
+            </div>
+
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <p> - ID : <span th:text="${fuelTerminal.id}"></span></p>
+                        <p> - Fuel Station : <a th:href="@{/fuelStations/info(fuelStationId=${fuelTerminal.id.stationId})}">The Fuel Station</a>
+                        <p> - Fuel Sam Id : <span th:text="${fuelTerminal.fuelSamId}"></span></p>
+                        <p> - Pay Sam Id : <span th:text="${fuelTerminal.paySamId}"></span></p>
+                        <p> - Fuel Type : <span th:text="${fuelTerminal.fuelId}"></span></p>
+                        <p> - Ipc Ip Addr : <span th:text="${fuelTerminal.ipcIpAddr}"></span></p>
+                        <p> - Pt Ip Addr : <span th:text="${fuelTerminal.ptIpAddr}"></span></p>
+                        <p> - Nozzle ID : <span th:text="${fuelTerminal.nozzleId}"></span></p>
+                        <p> - Oilcan ID : <span th:text="${fuelTerminal.oilcanId}"></span></p>
+                        <p> - Dispenser Type : <span th:text="${fuelTerminal.dispenserType}"></span></p>
+                    </div>
+                </div>
+            </div>
+            <br>
+
+        </div>
+
+    </div>
+
+    <!-- Country-selector modal-->
+    <div class="modal fade" id="country-selector">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content country-select-modal">
+                <div class="modal-header">
+                    <h6 class="modal-title" th:text="#{chooseLanguage}"></h6><button aria-label="Close" class="btn-close"
+                                                                       data-bs-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="row p-3" th:object="${fuelTerminal}">
+                        <li class="col-lg-6 mb-2">
+                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block"
+                               th:href="@{/fuelTerminals/info(fuelTerminalId=*{id.terminalId},lang=#{lang.change.en})}">
+                                    <span class="country-selector"><img alt="" src="../assets/images/flags/us_flag.jpg" th:text="#{english}"
+                                                                        class="me-3 language"></span>
+                            </a>
+                        </li>
+                        <li class="col-lg-6 mb-2">
+                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block"
+                               th:href="@{/fuelTerminals/info(fuelTerminalId=*{id.terminalId},lang=#{lang.change.fa})}">
+                                    <span class="country-selector"><img alt=""
+                                                                        src="../assets/images/flags/ir.svg" th:text="#{persian}"
+                                                                        class="me-3 language"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Country-selector modal-->
+
+    <!-- FOOTER -->
+    <footer class="footer" th:replace="~{fragments/template :: app-footer}">
+
+    </footer>
+
+    <!-- FOOTER CLOSED -->
+
+</div>
+
+<!-- JQUERY JS -->
+<script src="../assets/js/jquery.min.js"></script>
+
+<!-- BOOTSTRAP JS -->
+<script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
+<script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- SIDE-MENU JS -->
+<script src="../assets/plugins/sidemenu/sidemenu.js"></script>
+
+<!-- TypeHead js -->
+<script src="../assets/plugins/bootstrap5-typehead/autocomplete.js"></script>
+<script src="../assets/js/typehead.js"></script>
+
+<!-- SIDEBAR JS -->
+<script src="../assets/plugins/sidebar/sidebar.js"></script>
+
+<!-- Perfect SCROLLBAR JS-->
+<script src="../assets/plugins/p-scroll/perfect-scrollbar.js"></script>
+<script src="../assets/plugins/p-scroll/pscroll.js"></script>
+<script src="../assets/plugins/p-scroll/pscroll-1.js"></script>
+
+<!-- INTERNAL SELECT2 JS -->
+<script src="../assets/plugins/select2/select2.full.min.js"></script>
+
+<!-- INTERNAL Data tables js-->
+<script src="../assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
+<script src="../assets/plugins/datatable/js/dataTables.bootstrap5.js"></script>
+<script src="../assets/plugins/datatable/dataTables.responsive.min.js"></script>
+<script src="../assets/js/crypto-datatable.js"></script>
+
+<!-- Color Theme js -->
+<script src="../assets/js/themeColors.js"></script>
+
+<!-- Sticky js -->
+<script src="../assets/js/sticky.js"></script>
+
+<!-- CUSTOM JS -->
+<script src="../assets/js/custom.js"></script>
+
+<script th:replace="~{fragments/template :: search-script}"></script>
+
+</body>
+</html>

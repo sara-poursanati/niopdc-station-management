@@ -1,0 +1,198 @@
+<!doctype html>
+<html th:attr="dir=${#locale.language == 'fa' ? 'rtl' : 'ltr'}" th:lang="${#locale.language}">
+
+<head th:replace="~{fragments/template :: head}">
+
+</head>
+
+<body class="app sidebar-mini light-mode" th:classappend="${#locale.language == 'fa' ? 'rtl' : 'ltr'}" th:id="${#locale.language == 'fa' ? 'rtl' : 'ltr'}">
+
+<!-- GLOBAL-LOADER -->
+<div id="global-loader">
+  <img src="../assets/images/loader.svg" class="loader-img" alt="Loader">
+</div>
+<!-- /GLOBAL-LOADER -->
+
+<!-- PAGE -->
+<div class="page">
+  <div class="page-main">
+
+    <!-- app-Header -->
+    <div class="app-header header sticky" th:replace="~{fragments/template :: app-header}">
+
+    </div>
+    <!-- /app-Header -->
+
+    <!--APP-SIDEBAR-->
+    <div class="sticky" th:replace="~{fragments/template :: sidebar}">
+
+    </div>
+      <!--/APP-SIDEBAR-->
+
+    <!--app-content open-->
+    <div class="main-content app-content mt-0"  id="index-content">
+      <div class="side-app">
+
+        <!-- CONTAINER -->
+        <div class="main-container container-fluid">
+
+          <!-- PAGE-HEADER -->
+          <div class="page-header">
+            <h1 class="page-title" th:text = "#{dashboard}"></h1>
+            <div>
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)" th:text="#{home}"></a></li>
+                <li class="breadcrumb-item active" aria-current="page" th:text="#{dashboard}"></li>
+              </ol>
+            </div>
+          </div>
+          <!-- PAGE-HEADER END -->
+          <!-- ROW-2 -->
+
+          <!-- ROW-4 -->
+          <div class="row">
+            <div class="col-12 col-sm-12">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title mb-0" th:text="#{searchedResults}"></h3>
+                </div>
+                <div class="card-body pt-4">
+                  <div class="grid-margin">
+                    <div class="">
+                      <div class="panel panel-primary">
+
+                        <div class="panel-body tabs-menu-body border-0 pt-0">
+                          <div class="tab-content">
+                            <div class="tab-pane active" id="tab5">
+                              <div class="table-responsive">
+                                <table id="data-table"
+                                       class="table table-bordered text-nowrap mb-0">
+                                  <thead class="border-top">
+                                  <tr>
+                                    <th class="bg-transparent border-bottom-0" style="width: 5%;" th:text="#{tableId}"></th>
+                                    <th class="bg-transparent border-bottom-0" th:text="#{tableName}"></th>
+                                    <th class="bg-transparent border-bottom-0" th:text="#{tableCode}"></th>
+                                    <th class="bg-transparent border-bottom-0" th:text="#{tableAddress}"></th>
+                                    <th class="bg-transparent border-bottom-0" th:text="#{telephone}"></th>
+                                    <th class="bg-transparent border-bottom-0" style="width: 5%;" th:text="#{action}"></th>
+                                  </tr>
+                                  </thead>
+                                  <tbody>
+                                  <tr class="border-bottom" th:each="tempFuelStation : ${fuelStations}"
+                                      th:onclick="|redirectTo('@{/fuelStations/info(fuelStationId=${tempFuelStation.id})}')|">
+                                    <td class="text-center">
+                                      <div class="mt-0 mt-sm-2 d-block">
+                                        <h6 th:text="${tempFuelStation.id}"
+                                            class="mb-0 fs-14 fw-semibold">
+                                        </h6>
+                                      </div>
+                                    </td>
+                                    <td>
+                                      <div class="d-flex">
+                                        <div
+                                                class="ms-3 mt-0 mt-sm-2 d-block">
+                                          <h6 th:text="${tempFuelStation.name}"
+                                              class="mb-0 fs-14 fw-semibold">
+                                          </h6>
+                                        </div>
+                                      </div>
+                                    </td>
+                                    <td>
+                                      <div class="d-flex">
+                                        <div
+                                                class="mt-0 mt-sm-3 d-block">
+                                          <h6 th:text="${tempFuelStation.code}"
+                                              class="mb-0 fs-14 fw-semibold">
+                                          </h6>
+                                        </div>
+                                      </div>
+                                    </td>
+                                    <td><span th:text="${tempFuelStation.address}" class="mt-sm-2 d-block"></span>
+                                    </td>
+                                    <td><span th:text="${tempFuelStation.telephone1}"
+                                              class="fw-semibold mt-sm-2 d-block"></span>
+                                    </td>
+                                    <td>
+                                      <div class="g-2">
+                                        <a class="btn text-primary btn-sm" th:href="@{/fuelStations/update(fuelStationId=${tempFuelStation.id})}"
+                                           data-bs-toggle="tooltip"
+                                           data-bs-original-title="Edit"><span
+                                                class="fe fe-edit fs-14"></span></a>
+                                        <a class="btn text-danger btn-sm" th:href="@{/fuelStations/delete(fuelStationId=${tempFuelStation.id})}"
+                                           data-bs-toggle="tooltip"
+                                           data-bs-original-title="Delete"><span
+                                                class="fe fe-trash-2 fs-14"></span></a>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ROW-4 END -->
+        </div>
+        <!-- CONTAINER END -->
+      </div>
+    </div>
+    <!--app-content close-->
+
+  </div>
+
+  <!-- Country-selector modal-->
+  <div class="modal fade" id="country-selector">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content country-select-modal">
+        <div class="modal-header">
+          <h6 class="modal-title" th:text="#{chooseLanguage}"></h6><button aria-label="Close" class="btn-close"
+                                                                           data-bs-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
+        </div>
+        <div class="modal-body">
+          <ul class="row p-3">
+            <li class="col-lg-6 mb-2">
+              <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block"
+                 th:href="@{/(lang=#{lang.change.en})}">
+                                    <span class="country-selector"><img alt="" src="../assets/images/flags/us_flag.jpg" th:text="#{english}"
+                                                                        class="me-3 language"></span>
+              </a>
+            </li>
+            <li class="col-lg-6 mb-2">
+              <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block"
+                 th:href="@{/(lang=#{lang.change.fa})}" >
+                                    <span class="country-selector"><img alt=""
+                                                                        src="../assets/images/flags/ir.svg" th:text="#{persian}"
+                                                                        class="me-3 language"></span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Country-selector modal-->
+
+  <!-- FOOTER -->
+  <footer class="footer" th:replace="~{fragments/template :: app-footer}">
+
+  </footer>
+  <!-- FOOTER END -->
+
+</div>
+
+<!-- BACK-TO-TOP -->
+<a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
+
+<script th:replace="~{fragments/template :: search-script}"></script>
+<script th:replace="~{fragments/template :: scripts}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,110 @@
+<!doctype html>
+<html th:attr="dir=${#locale.language == 'fa' ? 'rtl' : 'ltr'}" th:lang="${#locale.language}">
+
+<head th:replace="~{fragments/template :: head}">
+
+</head>
+
+<body class="app sidebar-mini light-mode" th:classappend="${#locale.language == 'fa' ? 'rtl' : 'ltr'}" th:id="${#locale.language == 'fa' ? 'rtl' : 'ltr'}">
+
+    <!-- GLOBAL-LOADER -->
+    <div id="global-loader">
+        <img src="../assets/images/loader.svg" class="loader-img" alt="Loader">
+    </div>
+    <!-- /GLOBAL-LOADER -->
+
+    <!-- PAGE -->
+    <div class="page">
+        <div class="page-main">
+
+            <!-- app-Header -->
+            <div class="app-header header sticky" th:replace="~{fragments/template :: app-header}">
+
+            </div>
+            <!-- /app-Header -->
+
+            <!--APP-SIDEBAR-->
+            <div class="sticky" th:replace="~{fragments/template :: sidebar}">
+
+                <!--/APP-SIDEBAR-->
+            </div>
+
+            <!--app-content open-->
+            <div class="main-content app-content mt-0"  id="index-content">
+                <div class="side-app">
+
+                    <!-- CONTAINER -->
+                    <div class="main-container container-fluid">
+
+                        <!-- PAGE-HEADER -->
+                        <div class="page-header">
+                            <h1 class="page-title" th:text = "#{dashboard}"></h1>
+                            <div>
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="javascript:void(0)" th:text="#{home}"></a></li>
+                                    <li class="breadcrumb-item active" aria-current="page" th:text="#{dashboard}"></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- PAGE-HEADER END -->
+
+                        <!-- ROW-2 -->
+
+                    </div>
+                    <!-- CONTAINER END -->
+                </div>
+            </div>
+            <!--app-content close-->
+
+        </div>
+
+        <!-- Country-selector modal-->
+        <div class="modal fade" id="country-selector">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content country-select-modal">
+                    <div class="modal-header">
+                        <h6 class="modal-title" th:text="#{chooseLanguage}"></h6><button aria-label="Close" class="btn-close"
+                            data-bs-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <ul class="row p-3">
+                            <li class="col-lg-6 mb-2">
+                                <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block"
+                                   th:href="@{/(lang=#{lang.change.en})}">
+                                    <span class="country-selector"><img alt="" src="../assets/images/flags/us_flag.jpg" th:text="#{english}"
+                                            class="me-3 language"></span>
+                                </a>
+                            </li>
+                            <li class="col-lg-6 mb-2">
+                                <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block"
+                                th:href="@{/(lang=#{lang.change.fa})}" >
+                                    <span class="country-selector"><img alt=""
+                                        src="../assets/images/flags/ir.svg" th:text="#{persian}"
+                                        class="me-3 language"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Country-selector modal-->
+
+        <!-- FOOTER -->
+        <footer class="footer" th:replace="~{fragments/template :: app-footer}">
+
+        </footer>
+        <!-- FOOTER END -->
+
+    </div>
+
+    <!-- BACK-TO-TOP -->
+    <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
+
+    <script th:replace="~{fragments/template :: scripts}"></script>
+
+    <script th:replace="~{fragments/template :: search-script}"></script>
+
+</body>
+
+</html>
